@@ -1,0 +1,112 @@
+{
+  "sample": false,
+  "model": "XGBoost",
+  "objective": "Cross-sectional ranking: classifier estimates P(beats the day's cross-sectional median return over the next 20 trading days)",
+  "universeSize": 90,
+  "topN": 3,
+  "rebalanceDays": 20,
+  "testStart": "2023-01-03",
+  "testEnd": "2026-07-09",
+  "positionSizing": "inverse-volatility within the basket, then scaled as a whole to a 17.3% annualized volatility target (0.2x-1.0x exposure)",
+  "transactionCostsIncluded": true,
+  "roundTripCostBps": 15.0,
+  "validation": "Walk-forward: retrained every 20 trading days on an expanding window of past data only, with a 20-day embargo between the training cutoff and the scored period to prevent the forward-looking label from leaking into training.",
+  "earningsExclusion": "Tickers within 5 trading days of an earnings report are excluded from the pick pool.",
+  "featureCount": 34,
+  "featureGroups": [
+    {
+      "group": "Momentum",
+      "features": [
+        "return_5d",
+        "return_10d",
+        "return_20d"
+      ],
+      "note": "Recent relative price persistence over three horizons."
+    },
+    {
+      "group": "Trend",
+      "features": [
+        "close_vs_ema20",
+        "close_vs_ema50",
+        "close_vs_ema100"
+      ],
+      "note": "Price position relative to short/medium/long moving averages."
+    },
+    {
+      "group": "Volatility",
+      "features": [
+        "volatility_5d",
+        "volatility_20d"
+      ],
+      "note": "Realised volatility over two lookback windows; also drives inverse-volatility position sizing."
+    },
+    {
+      "group": "Oscillators",
+      "features": [
+        "rsi",
+        "bollinger_zscore"
+      ],
+      "note": "Overbought/oversold and mean-reversion context."
+    },
+    {
+      "group": "Range & structure",
+      "features": [
+        "range_position_20d",
+        "close_vs_prev_week_high",
+        "close_vs_prev_week_low",
+        "close_vs_prev_month_high",
+        "close_vs_prev_month_low",
+        "close_vs_20d_high",
+        "close_vs_20d_low",
+        "close_vs_50d_high",
+        "close_vs_50d_low"
+      ],
+      "note": "Position within recent trading ranges and proximity to prior highs/lows."
+    },
+    {
+      "group": "Candle shape",
+      "features": [
+        "upper_wick_pct",
+        "lower_wick_pct",
+        "body_pct"
+      ],
+      "note": "Intraday rejection and conviction within the day's bar."
+    },
+    {
+      "group": "Volume",
+      "features": [
+        "volume_vs_20d",
+        "volume_vs_60d"
+      ],
+      "note": "Participation relative to trailing averages."
+    },
+    {
+      "group": "Market context",
+      "features": [
+        "spy_return_1d",
+        "spy_return_5d",
+        "spy_vs_ema50",
+        "vix_level",
+        "vix_vs_60d"
+      ],
+      "note": "Index-level regime (SPY, VIX) -- identical across tickers on a date, giving the model context rather than cross-sectional separation."
+    },
+    {
+      "group": "Earnings timing",
+      "features": [
+        "days_since_earnings",
+        "days_to_earnings"
+      ],
+      "note": "Distance to the nearest earnings report."
+    },
+    {
+      "group": "Fundamentals",
+      "features": [
+        "pe_ratio",
+        "profit_margin",
+        "revenue_growth_yoy"
+      ],
+      "note": "SEC EDGAR XBRL fundamentals, dated to actual filing dates."
+    }
+  ]
+}

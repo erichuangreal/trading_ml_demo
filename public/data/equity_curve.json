@@ -1,0 +1,283 @@
+{
+  "sample": false,
+  "note": "Real compounded path from the final saved walk-forward run (v4xgboost_walkforward_2026-08-26_22-53-59). Each point is the cumulative value after the prior 20-trading-day holding period's realized, cost-adjusted return. The final point's date is approximated (20 trading days after the last rebalance) since the source panel does not extend that far.",
+  "startValue": 100,
+  "series": [
+    {
+      "date": "2023-01-03",
+      "topThree": 100.0,
+      "spy": 100.0,
+      "universe": 100.0
+    },
+    {
+      "date": "2023-02-01",
+      "topThree": 126.473,
+      "spy": 107.872,
+      "universe": 113.813
+    },
+    {
+      "date": "2023-03-02",
+      "topThree": 126.131,
+      "spy": 104.461,
+      "universe": 111.107
+    },
+    {
+      "date": "2023-03-30",
+      "topThree": 136.116,
+      "spy": 106.413,
+      "universe": 115.539
+    },
+    {
+      "date": "2023-04-28",
+      "topThree": 134.03,
+      "spy": 109.636,
+      "universe": 115.22
+    },
+    {
+      "date": "2023-05-26",
+      "topThree": 137.29,
+      "spy": 110.715,
+      "universe": 125.251
+    },
+    {
+      "date": "2023-06-27",
+      "topThree": 141.343,
+      "spy": 115.399,
+      "universe": 131.166
+    },
+    {
+      "date": "2023-07-26",
+      "topThree": 142.327,
+      "spy": 120.515,
+      "universe": 137.805
+    },
+    {
+      "date": "2023-08-23",
+      "topThree": 139.338,
+      "spy": 117.214,
+      "universe": 133.63
+    },
+    {
+      "date": "2023-09-21",
+      "topThree": 141.227,
+      "spy": 114.537,
+      "universe": 129.475
+    },
+    {
+      "date": "2023-10-19",
+      "topThree": 141.249,
+      "spy": 113.22,
+      "universe": 129.343
+    },
+    {
+      "date": "2023-11-16",
+      "topThree": 143.312,
+      "spy": 119.539,
+      "universe": 136.013
+    },
+    {
+      "date": "2023-12-15",
+      "topThree": 147.475,
+      "spy": 125.115,
+      "universe": 148.071
+    },
+    {
+      "date": "2024-01-17",
+      "topThree": 144.259,
+      "spy": 125.904,
+      "universe": 147.662
+    },
+    {
+      "date": "2024-02-14",
+      "topThree": 151.017,
+      "spy": 132.91,
+      "universe": 158.558
+    },
+    {
+      "date": "2024-03-14",
+      "topThree": 153.371,
+      "spy": 137.277,
+      "universe": 162.282
+    },
+    {
+      "date": "2024-04-12",
+      "topThree": 160.464,
+      "spy": 136.607,
+      "universe": 159.696
+    },
+    {
+      "date": "2024-05-10",
+      "topThree": 164.079,
+      "spy": 139.278,
+      "universe": 161.111
+    },
+    {
+      "date": "2024-06-10",
+      "topThree": 170.998,
+      "spy": 143.241,
+      "universe": 164.722
+    },
+    {
+      "date": "2024-07-10",
+      "topThree": 179.469,
+      "spy": 150.587,
+      "universe": 170.436
+    },
+    {
+      "date": "2024-08-07",
+      "topThree": 163.152,
+      "spy": 139.143,
+      "universe": 154.279
+    },
+    {
+      "date": "2024-09-05",
+      "topThree": 166.498,
+      "spy": 147.446,
+      "universe": 162.538
+    },
+    {
+      "date": "2024-10-03",
+      "topThree": 171.864,
+      "spy": 152.798,
+      "universe": 169.596
+    },
+    {
+      "date": "2024-10-31",
+      "topThree": 179.372,
+      "spy": 153.019,
+      "universe": 169.704
+    },
+    {
+      "date": "2024-11-29",
+      "topThree": 190.499,
+      "spy": 162.144,
+      "universe": 183.095
+    },
+    {
+      "date": "2024-12-30",
+      "topThree": 178.337,
+      "spy": 158.82,
+      "universe": 174.581
+    },
+    {
+      "date": "2025-01-30",
+      "topThree": 191.255,
+      "spy": 163.362,
+      "universe": 181.521
+    },
+    {
+      "date": "2025-02-28",
+      "topThree": 220.573,
+      "spy": 160.43,
+      "universe": 176.577
+    },
+    {
+      "date": "2025-03-28",
+      "topThree": 212.61,
+      "spy": 150.481,
+      "universe": 165.528
+    },
+    {
+      "date": "2025-04-28",
+      "topThree": 222.051,
+      "spy": 149.178,
+      "universe": 165.288
+    },
+    {
+      "date": "2025-05-27",
+      "topThree": 232.617,
+      "spy": 160.092,
+      "universe": 183.537
+    },
+    {
+      "date": "2025-06-25",
+      "topThree": 235.395,
+      "spy": 164.903,
+      "universe": 188.206
+    },
+    {
+      "date": "2025-07-24",
+      "topThree": 230.493,
+      "spy": 172.318,
+      "universe": 195.678
+    },
+    {
+      "date": "2025-08-21",
+      "topThree": 218.877,
+      "spy": 172.625,
+      "universe": 187.575
+    },
+    {
+      "date": "2025-09-19",
+      "topThree": 229.095,
+      "spy": 180.77,
+      "universe": 192.154
+    },
+    {
+      "date": "2025-10-17",
+      "topThree": 229.123,
+      "spy": 180.958,
+      "universe": 193.867
+    },
+    {
+      "date": "2025-11-14",
+      "topThree": 234.855,
+      "spy": 183.012,
+      "universe": 192.56
+    },
+    {
+      "date": "2025-12-15",
+      "topThree": 228.33,
+      "spy": 185.409,
+      "universe": 198.374
+    },
+    {
+      "date": "2026-01-14",
+      "topThree": 216.221,
+      "spy": 188.587,
+      "universe": 202.468
+    },
+    {
+      "date": "2026-02-12",
+      "topThree": 204.424,
+      "spy": 186.104,
+      "universe": 198.196
+    },
+    {
+      "date": "2026-03-13",
+      "topThree": 195.279,
+      "spy": 180.919,
+      "universe": 193.268
+    },
+    {
+      "date": "2026-04-13",
+      "topThree": 186.052,
+      "spy": 187.935,
+      "universe": 198.078
+    },
+    {
+      "date": "2026-05-11",
+      "topThree": 241.858,
+      "spy": 202.508,
+      "universe": 222.687
+    },
+    {
+      "date": "2026-06-09",
+      "topThree": 239.732,
+      "spy": 202.486,
+      "universe": 227.186
+    },
+    {
+      "date": "2026-07-09",
+      "topThree": 249.283,
+      "spy": 207.046,
+      "universe": 232.954
+    },
+    {
+      "date": "2026-08-06",
+      "topThree": 256.017,
+      "spy": 211.687,
+      "universe": 235.168
+    }
+  ]
+}

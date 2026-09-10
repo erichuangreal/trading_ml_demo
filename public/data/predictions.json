@@ -1,0 +1,1626 @@
+{
+  "sample": false,
+  "note": "Real historical rebalances from the final saved walk-forward run (v4xgboost_walkforward_2026-08-26_22-53-59). Scores are the model's classifier probability of beating the cross-sectional median return over the next 20 trading days, produced walk-forward (only past data was used to train the model active on each date). These are historical out-of-sample model outputs, not live recommendations.",
+  "periods": [
+    {
+      "date": "2023-01-03",
+      "picks": [
+        {
+          "rank": 1,
+          "ticker": "TXN",
+          "score": 0.7471,
+          "actualPercentile": 0.5222,
+          "next20dReturn": 0.1237,
+          "volatility20d": 0.0143
+        },
+        {
+          "rank": 2,
+          "ticker": "TEAM",
+          "score": 0.7075,
+          "actualPercentile": 0.9556,
+          "next20dReturn": 0.3463,
+          "volatility20d": 0.0413
+        },
+        {
+          "rank": 3,
+          "ticker": "TSLA",
+          "score": 0.7066,
+          "actualPercentile": 0.9889,
+          "next20dReturn": 0.6782,
+          "volatility20d": 0.0513
+        }
+      ],
+      "exposure": 1.0,
+      "portfolioReturn": 0.2647,
+      "spyReturn": 0.0787,
+      "universeReturn": 0.1381,
+      "excessReturnVsSpy": 0.186,
+      "meanActualPercentile": 0.8222,
+      "beatMedianCount": 3
+    },
+    {
+      "date": "2023-02-01",
+      "picks": [
+        {
+          "rank": 1,
+          "ticker": "CTAS",
+          "score": 0.7331,
+          "actualPercentile": 0.5111,
+          "next20dReturn": -0.0223,
+          "volatility20d": 0.0142
+        },
+        {
+          "rank": 2,
+          "ticker": "PEP",
+          "score": 0.6307,
+          "actualPercentile": 0.7889,
+          "next20dReturn": 0.0171,
+          "volatility20d": 0.0103
+        },
+        {
+          "rank": 3,
+          "ticker": "CSX",
+          "score": 0.6089,
+          "actualPercentile": 0.6444,
+          "next20dReturn": -0.0063,
+          "volatility20d": 0.018
+        }
+      ],
+      "exposure": 1.0,
+      "portfolioReturn": -0.0027,
+      "spyReturn": -0.0316,
+      "universeReturn": -0.0238,
+      "excessReturnVsSpy": 0.0289,
+      "meanActualPercentile": 0.6481,
+      "beatMedianCount": 3
+    },
+    {
+      "date": "2023-03-02",
+      "picks": [
+        {
+          "rank": 1,
+          "ticker": "LRCX",
+          "score": 0.7612,
+          "actualPercentile": 0.8222,
+          "next20dReturn": 0.0884,
+          "volatility20d": 0.0183
+        },
+        {
+          "rank": 2,
+          "ticker": "NFLX",
+          "score": 0.6725,
+          "actualPercentile": 0.8111,
+          "next20dReturn": 0.0851,
+          "volatility20d": 0.0191
+        },
+        {
+          "rank": 3,
+          "ticker": "CTAS",
+          "score": 0.6617,
+          "actualPercentile": 0.7778,
+          "next20dReturn": 0.0743,
+          "volatility20d": 0.0096
+        }
+      ],
+      "exposure": 1.0,
+      "portfolioReturn": 0.0792,
+      "spyReturn": 0.0187,
+      "universeReturn": 0.0399,
+      "excessReturnVsSpy": 0.0605,
+      "meanActualPercentile": 0.8037,
+      "beatMedianCount": 3
+    },
+    {
+      "date": "2023-03-30",
+      "picks": [
+        {
+          "rank": 1,
+          "ticker": "IDXX",
+          "score": 0.7414,
+          "actualPercentile": 0.4778,
+          "next20dReturn": -0.0028,
+          "volatility20d": 0.0205
+        },
+        {
+          "rank": 2,
+          "ticker": "WDAY",
+          "score": 0.6939,
+          "actualPercentile": 0.2444,
+          "next20dReturn": -0.0695,
+          "volatility20d": 0.02
+        },
+        {
+          "rank": 3,
+          "ticker": "ALGN",
+          "score": 0.6467,
+          "actualPercentile": 0.7333,
+          "next20dReturn": 0.0431,
+          "volatility20d": 0.0253
+        }
+      ],
+      "exposure": 1.0,
+      "portfolioReturn": -0.0153,
+      "spyReturn": 0.0303,
+      "universeReturn": -0.0028,
+      "excessReturnVsSpy": -0.0456,
+      "meanActualPercentile": 0.4852,
+      "beatMedianCount": 1
+    },
+    {
+      "date": "2023-04-28",
+      "picks": [
+        {
+          "rank": 1,
+          "ticker": "ZS",
+          "score": 0.7084,
+          "actualPercentile": 0.9778,
+          "next20dReturn": 0.4497,
+          "volatility20d": 0.0315
+        },
+        {
+          "rank": 2,
+          "ticker": "JD",
+          "score": 0.6904,
+          "actualPercentile": 0.1333,
+          "next20dReturn": -0.0733,
+          "volatility20d": 0.0247
+        },
+        {
+          "rank": 3,
+          "ticker": "ADI",
+          "score": 0.6829,
+          "actualPercentile": 0.4,
+          "next20dReturn": -0.0186,
+          "volatility20d": 0.0129
+        }
+      ],
+      "exposure": 0.377,
+      "portfolioReturn": 0.0243,
+      "spyReturn": 0.0098,
+      "universeReturn": 0.0871,
+      "excessReturnVsSpy": 0.0145,
+      "meanActualPercentile": 0.5037,
+      "beatMedianCount": 1
+    },
+    {
+      "date": "2023-05-26",
+      "picks": [
+        {
+          "rank": 1,
+          "ticker": "FAST",
+          "score": 0.659,
+          "actualPercentile": 0.6333,
+          "next20dReturn": 0.0598,
+          "volatility20d": 0.0101
+        },
+        {
+          "rank": 2,
+          "ticker": "ALGN",
+          "score": 0.6437,
+          "actualPercentile": 0.9778,
+          "next20dReturn": 0.1938,
+          "volatility20d": 0.0224
+        },
+        {
+          "rank": 3,
+          "ticker": "ADP",
+          "score": 0.6334,
+          "actualPercentile": 0.3556,
+          "next20dReturn": 0.0206,
+          "volatility20d": 0.0106
+        }
+      ],
+      "exposure": 0.435,
+      "portfolioReturn": 0.0295,
+      "spyReturn": 0.0423,
+      "universeReturn": 0.0472,
+      "excessReturnVsSpy": -0.0128,
+      "meanActualPercentile": 0.6556,
+      "beatMedianCount": 2
+    },
+    {
+      "date": "2023-06-27",
+      "picks": [
+        {
+          "rank": 1,
+          "ticker": "MRVL",
+          "score": 0.7315,
+          "actualPercentile": 0.6222,
+          "next20dReturn": 0.0525,
+          "volatility20d": 0.0295
+        },
+        {
+          "rank": 2,
+          "ticker": "AMD",
+          "score": 0.6951,
+          "actualPercentile": 0.1222,
+          "next20dReturn": -0.0027,
+          "volatility20d": 0.0321
+        },
+        {
+          "rank": 3,
+          "ticker": "FAST",
+          "score": 0.6859,
+          "actualPercentile": 0.2111,
+          "next20dReturn": 0.0072,
+          "volatility20d": 0.013
+        }
+      ],
+      "exposure": 0.486,
+      "portfolioReturn": 0.007,
+      "spyReturn": 0.0443,
+      "universeReturn": 0.0506,
+      "excessReturnVsSpy": -0.0374,
+      "meanActualPercentile": 0.3185,
+      "beatMedianCount": 1
+    },
+    {
+      "date": "2023-07-26",
+      "picks": [
+        {
+          "rank": 1,
+          "ticker": "MDB",
+          "score": 0.7814,
+          "actualPercentile": 0.1667,
+          "next20dReturn": -0.0849,
+          "volatility20d": 0.0239
+        },
+        {
+          "rank": 2,
+          "ticker": "MRVL",
+          "score": 0.7471,
+          "actualPercentile": 0.4444,
+          "next20dReturn": -0.0347,
+          "volatility20d": 0.0218
+        },
+        {
+          "rank": 3,
+          "ticker": "AMD",
+          "score": 0.7066,
+          "actualPercentile": 0.6111,
+          "next20dReturn": -0.006,
+          "volatility20d": 0.0195
+        }
+      ],
+      "exposure": 0.515,
+      "portfolioReturn": -0.021,
+      "spyReturn": -0.0274,
+      "universeReturn": -0.0303,
+      "excessReturnVsSpy": 0.0064,
+      "meanActualPercentile": 0.4074,
+      "beatMedianCount": 1
+    },
+    {
+      "date": "2023-08-23",
+      "picks": [
+        {
+          "rank": 1,
+          "ticker": "INTC",
+          "score": 0.8722,
+          "actualPercentile": 0.8333,
+          "next20dReturn": 0.0197,
+          "volatility20d": 0.0255
+        },
+        {
+          "rank": 2,
+          "ticker": "MU",
+          "score": 0.8647,
+          "actualPercentile": 0.9222,
+          "next20dReturn": 0.0416,
+          "volatility20d": 0.0262
+        },
+        {
+          "rank": 3,
+          "ticker": "ZS",
+          "score": 0.7364,
+          "actualPercentile": 0.8444,
+          "next20dReturn": 0.0228,
+          "volatility20d": 0.0283
+        }
+      ],
+      "exposure": 0.51,
+      "portfolioReturn": 0.0136,
+      "spyReturn": -0.0228,
+      "universeReturn": -0.0311,
+      "excessReturnVsSpy": 0.0364,
+      "meanActualPercentile": 0.8667,
+      "beatMedianCount": 3
+    },
+    {
+      "date": "2023-09-21",
+      "picks": [
+        {
+          "rank": 1,
+          "ticker": "MU",
+          "score": 0.7043,
+          "actualPercentile": 0.5111,
+          "next20dReturn": -0.0038,
+          "volatility20d": 0.0158
+        },
+        {
+          "rank": 2,
+          "ticker": "LRCX",
+          "score": 0.6922,
+          "actualPercentile": 0.4222,
+          "next20dReturn": -0.0138,
+          "volatility20d": 0.019
+        },
+        {
+          "rank": 3,
+          "ticker": "INTC",
+          "score": 0.6811,
+          "actualPercentile": 0.6778,
+          "next20dReturn": 0.0294,
+          "volatility20d": 0.0235
+        }
+      ],
+      "exposure": 0.542,
+      "portfolioReturn": 0.0002,
+      "spyReturn": -0.0115,
+      "universeReturn": -0.001,
+      "excessReturnVsSpy": 0.0117,
+      "meanActualPercentile": 0.537,
+      "beatMedianCount": 2
+    },
+    {
+      "date": "2023-10-19",
+      "picks": [
+        {
+          "rank": 1,
+          "ticker": "ADP",
+          "score": 0.7184,
+          "actualPercentile": 0.1,
+          "next20dReturn": -0.0657,
+          "volatility20d": 0.0093
+        },
+        {
+          "rank": 2,
+          "ticker": "MU",
+          "score": 0.7174,
+          "actualPercentile": 0.8333,
+          "next20dReturn": 0.1353,
+          "volatility20d": 0.0172
+        },
+        {
+          "rank": 3,
+          "ticker": "ADBE",
+          "score": 0.708,
+          "actualPercentile": 0.6,
+          "next20dReturn": 0.0833,
+          "volatility20d": 0.0149
+        }
+      ],
+      "exposure": 0.565,
+      "portfolioReturn": 0.0146,
+      "spyReturn": 0.0558,
+      "universeReturn": 0.0516,
+      "excessReturnVsSpy": -0.0412,
+      "meanActualPercentile": 0.5111,
+      "beatMedianCount": 2
+    },
+    {
+      "date": "2023-11-16",
+      "picks": [
+        {
+          "rank": 1,
+          "ticker": "CTAS",
+          "score": 0.7531,
+          "actualPercentile": 0.2,
+          "next20dReturn": 0.0095,
+          "volatility20d": 0.0086
+        },
+        {
+          "rank": 2,
+          "ticker": "BIIB",
+          "score": 0.6791,
+          "actualPercentile": 0.5,
+          "next20dReturn": 0.0814,
+          "volatility20d": 0.02
+        },
+        {
+          "rank": 3,
+          "ticker": "ON",
+          "score": 0.6619,
+          "actualPercentile": 0.9444,
+          "next20dReturn": 0.2331,
+          "volatility20d": 0.0567
+        }
+      ],
+      "exposure": 0.594,
+      "portfolioReturn": 0.0291,
+      "spyReturn": 0.0466,
+      "universeReturn": 0.0887,
+      "excessReturnVsSpy": -0.0176,
+      "meanActualPercentile": 0.5481,
+      "beatMedianCount": 1
+    },
+    {
+      "date": "2023-12-15",
+      "picks": [
+        {
+          "rank": 1,
+          "ticker": "PAYX",
+          "score": 0.7011,
+          "actualPercentile": 0.1667,
+          "next20dReturn": -0.0531,
+          "volatility20d": 0.0077
+        },
+        {
+          "rank": 2,
+          "ticker": "CDNS",
+          "score": 0.6835,
+          "actualPercentile": 0.5889,
+          "next20dReturn": 0.0143,
+          "volatility20d": 0.0141
+        },
+        {
+          "rank": 3,
+          "ticker": "CHTR",
+          "score": 0.6776,
+          "actualPercentile": 0.1444,
+          "next20dReturn": -0.0545,
+          "volatility20d": 0.0247
+        }
+      ],
+      "exposure": 0.623,
+      "portfolioReturn": -0.0218,
+      "spyReturn": 0.0063,
+      "universeReturn": -0.0028,
+      "excessReturnVsSpy": -0.0281,
+      "meanActualPercentile": 0.3,
+      "beatMedianCount": 1
+    },
+    {
+      "date": "2024-01-17",
+      "picks": [
+        {
+          "rank": 1,
+          "ticker": "INTC",
+          "score": 0.7916,
+          "actualPercentile": 0.1444,
+          "next20dReturn": -0.0378,
+          "volatility20d": 0.0223
+        },
+        {
+          "rank": 2,
+          "ticker": "ZS",
+          "score": 0.6829,
+          "actualPercentile": 0.7778,
+          "next20dReturn": 0.124,
+          "volatility20d": 0.0193
+        },
+        {
+          "rank": 3,
+          "ticker": "ON",
+          "score": 0.6816,
+          "actualPercentile": 0.8,
+          "next20dReturn": 0.1301,
+          "volatility20d": 0.0201
+        }
+      ],
+      "exposure": 0.624,
+      "portfolioReturn": 0.0468,
+      "spyReturn": 0.0556,
+      "universeReturn": 0.0738,
+      "excessReturnVsSpy": -0.0088,
+      "meanActualPercentile": 0.5741,
+      "beatMedianCount": 2
+    },
+    {
+      "date": "2024-02-14",
+      "picks": [
+        {
+          "rank": 1,
+          "ticker": "INTC",
+          "score": 0.8277,
+          "actualPercentile": 0.2667,
+          "next20dReturn": -0.0326,
+          "volatility20d": 0.0308
+        },
+        {
+          "rank": 2,
+          "ticker": "CTAS",
+          "score": 0.7479,
+          "actualPercentile": 0.6111,
+          "next20dReturn": 0.0278,
+          "volatility20d": 0.0086
+        },
+        {
+          "rank": 3,
+          "ticker": "GILD",
+          "score": 0.6827,
+          "actualPercentile": 0.6,
+          "next20dReturn": 0.0264,
+          "volatility20d": 0.0253
+        }
+      ],
+      "exposure": 1.0,
+      "portfolioReturn": 0.0156,
+      "spyReturn": 0.0329,
+      "universeReturn": 0.0235,
+      "excessReturnVsSpy": -0.0173,
+      "meanActualPercentile": 0.4926,
+      "beatMedianCount": 2
+    },
+    {
+      "date": "2024-03-14",
+      "picks": [
+        {
+          "rank": 1,
+          "ticker": "CTAS",
+          "score": 0.7859,
+          "actualPercentile": 0.9444,
+          "next20dReturn": 0.0615,
+          "volatility20d": 0.0069
+        },
+        {
+          "rank": 2,
+          "ticker": "MSTR",
+          "score": 0.6426,
+          "actualPercentile": 0.0889,
+          "next20dReturn": -0.1176,
+          "volatility20d": 0.1006
+        },
+        {
+          "rank": 3,
+          "ticker": "META",
+          "score": 0.6424,
+          "actualPercentile": 0.8778,
+          "next20dReturn": 0.0408,
+          "volatility20d": 0.0209
+        }
+      ],
+      "exposure": 1.0,
+      "portfolioReturn": 0.0463,
+      "spyReturn": -0.0049,
+      "universeReturn": -0.0159,
+      "excessReturnVsSpy": 0.0511,
+      "meanActualPercentile": 0.637,
+      "beatMedianCount": 2
+    },
+    {
+      "date": "2024-04-12",
+      "picks": [
+        {
+          "rank": 1,
+          "ticker": "CHTR",
+          "score": 0.7064,
+          "actualPercentile": 0.7444,
+          "next20dReturn": 0.0578,
+          "volatility20d": 0.0156
+        },
+        {
+          "rank": 2,
+          "ticker": "ON",
+          "score": 0.6899,
+          "actualPercentile": 0.7333,
+          "next20dReturn": 0.0573,
+          "volatility20d": 0.0241
+        },
+        {
+          "rank": 3,
+          "ticker": "CPRT",
+          "score": 0.6452,
+          "actualPercentile": 0.4111,
+          "next20dReturn": -0.0116,
+          "volatility20d": 0.01
+        }
+      ],
+      "exposure": 1.0,
+      "portfolioReturn": 0.0225,
+      "spyReturn": 0.0196,
+      "universeReturn": 0.0089,
+      "excessReturnVsSpy": 0.003,
+      "meanActualPercentile": 0.6296,
+      "beatMedianCount": 2
+    },
+    {
+      "date": "2024-05-10",
+      "picks": [
+        {
+          "rank": 1,
+          "ticker": "FTNT",
+          "score": 0.7194,
+          "actualPercentile": 0.5667,
+          "next20dReturn": 0.0332,
+          "volatility20d": 0.0253
+        },
+        {
+          "rank": 2,
+          "ticker": "TXN",
+          "score": 0.7164,
+          "actualPercentile": 0.7222,
+          "next20dReturn": 0.0565,
+          "volatility20d": 0.017
+        },
+        {
+          "rank": 3,
+          "ticker": "INTC",
+          "score": 0.6927,
+          "actualPercentile": 0.6111,
+          "next20dReturn": 0.0355,
+          "volatility20d": 0.0239
+        }
+      ],
+      "exposure": 1.0,
+      "portfolioReturn": 0.0422,
+      "spyReturn": 0.0285,
+      "universeReturn": 0.0224,
+      "excessReturnVsSpy": 0.0137,
+      "meanActualPercentile": 0.6333,
+      "beatMedianCount": 3
+    },
+    {
+      "date": "2024-06-10",
+      "picks": [
+        {
+          "rank": 1,
+          "ticker": "MDB",
+          "score": 0.8152,
+          "actualPercentile": 0.8222,
+          "next20dReturn": 0.096,
+          "volatility20d": 0.0559
+        },
+        {
+          "rank": 2,
+          "ticker": "TXN",
+          "score": 0.7349,
+          "actualPercentile": 0.4778,
+          "next20dReturn": 0.0304,
+          "volatility20d": 0.013
+        },
+        {
+          "rank": 3,
+          "ticker": "ZS",
+          "score": 0.7289,
+          "actualPercentile": 0.7222,
+          "next20dReturn": 0.0732,
+          "volatility20d": 0.0281
+        }
+      ],
+      "exposure": 1.0,
+      "portfolioReturn": 0.0495,
+      "spyReturn": 0.0513,
+      "universeReturn": 0.0347,
+      "excessReturnVsSpy": -0.0017,
+      "meanActualPercentile": 0.6741,
+      "beatMedianCount": 2
+    },
+    {
+      "date": "2024-07-10",
+      "picks": [
+        {
+          "rank": 1,
+          "ticker": "MDB",
+          "score": 0.7339,
+          "actualPercentile": 0.5,
+          "next20dReturn": -0.0864,
+          "volatility20d": 0.0308
+        },
+        {
+          "rank": 2,
+          "ticker": "LRCX",
+          "score": 0.6998,
+          "actualPercentile": 0.0667,
+          "next20dReturn": -0.3364,
+          "volatility20d": 0.0165
+        },
+        {
+          "rank": 3,
+          "ticker": "CTAS",
+          "score": 0.6763,
+          "actualPercentile": 0.7778,
+          "next20dReturn": 0.0341,
+          "volatility20d": 0.0083
+        }
+      ],
+      "exposure": 1.0,
+      "portfolioReturn": -0.0909,
+      "spyReturn": -0.076,
+      "universeReturn": -0.0948,
+      "excessReturnVsSpy": -0.0149,
+      "meanActualPercentile": 0.4481,
+      "beatMedianCount": 1
+    },
+    {
+      "date": "2024-08-07",
+      "picks": [
+        {
+          "rank": 1,
+          "ticker": "CRWD",
+          "score": 0.8543,
+          "actualPercentile": 0.8444,
+          "next20dReturn": 0.1117,
+          "volatility20d": 0.0456
+        },
+        {
+          "rank": 2,
+          "ticker": "DXCM",
+          "score": 0.8144,
+          "actualPercentile": 0.1444,
+          "next20dReturn": -0.0039,
+          "volatility20d": 0.0968
+        },
+        {
+          "rank": 3,
+          "ticker": "GOOGL",
+          "score": 0.7002,
+          "actualPercentile": 0.1333,
+          "next20dReturn": -0.0107,
+          "volatility20d": 0.0192
+        }
+      ],
+      "exposure": 1.0,
+      "portfolioReturn": 0.0205,
+      "spyReturn": 0.0597,
+      "universeReturn": 0.0535,
+      "excessReturnVsSpy": -0.0392,
+      "meanActualPercentile": 0.3741,
+      "beatMedianCount": 1
+    },
+    {
+      "date": "2024-09-05",
+      "picks": [
+        {
+          "rank": 1,
+          "ticker": "CTAS",
+          "score": 0.7586,
+          "actualPercentile": 0.4667,
+          "next20dReturn": 0.0241,
+          "volatility20d": 0.0058
+        },
+        {
+          "rank": 2,
+          "ticker": "TXN",
+          "score": 0.664,
+          "actualPercentile": 0.3,
+          "next20dReturn": 0.0006,
+          "volatility20d": 0.0239
+        },
+        {
+          "rank": 3,
+          "ticker": "ADP",
+          "score": 0.631,
+          "actualPercentile": 0.6889,
+          "next20dReturn": 0.0588,
+          "volatility20d": 0.0082
+        }
+      ],
+      "exposure": 1.0,
+      "portfolioReturn": 0.0322,
+      "spyReturn": 0.0363,
+      "universeReturn": 0.0434,
+      "excessReturnVsSpy": -0.0041,
+      "meanActualPercentile": 0.4852,
+      "beatMedianCount": 1
+    },
+    {
+      "date": "2024-10-03",
+      "picks": [
+        {
+          "rank": 1,
+          "ticker": "DXCM",
+          "score": 0.7218,
+          "actualPercentile": 0.9,
+          "next20dReturn": 0.0731,
+          "volatility20d": 0.0161
+        },
+        {
+          "rank": 2,
+          "ticker": "PANW",
+          "score": 0.6453,
+          "actualPercentile": 0.8778,
+          "next20dReturn": 0.0726,
+          "volatility20d": 0.017
+        },
+        {
+          "rank": 3,
+          "ticker": "ADP",
+          "score": 0.6214,
+          "actualPercentile": 0.5667,
+          "next20dReturn": 0.0162,
+          "volatility20d": 0.0087
+        }
+      ],
+      "exposure": 1.0,
+      "portfolioReturn": 0.0437,
+      "spyReturn": 0.0014,
+      "universeReturn": 0.0006,
+      "excessReturnVsSpy": 0.0422,
+      "meanActualPercentile": 0.7815,
+      "beatMedianCount": 3
+    },
+    {
+      "date": "2024-10-31",
+      "picks": [
+        {
+          "rank": 1,
+          "ticker": "DLTR",
+          "score": 0.6225,
+          "actualPercentile": 0.6778,
+          "next20dReturn": 0.1026,
+          "volatility20d": 0.0149
+        },
+        {
+          "rank": 2,
+          "ticker": "AMAT",
+          "score": 0.6168,
+          "actualPercentile": 0.1333,
+          "next20dReturn": -0.0356,
+          "volatility20d": 0.0302
+        },
+        {
+          "rank": 3,
+          "ticker": "PANW",
+          "score": 0.6137,
+          "actualPercentile": 0.5667,
+          "next20dReturn": 0.0763,
+          "volatility20d": 0.0193
+        }
+      ],
+      "exposure": 1.0,
+      "portfolioReturn": 0.062,
+      "spyReturn": 0.0596,
+      "universeReturn": 0.0789,
+      "excessReturnVsSpy": 0.0024,
+      "meanActualPercentile": 0.4593,
+      "beatMedianCount": 2
+    },
+    {
+      "date": "2024-11-29",
+      "picks": [
+        {
+          "rank": 1,
+          "ticker": "REGN",
+          "score": 0.6996,
+          "actualPercentile": 0.4222,
+          "next20dReturn": -0.0635,
+          "volatility20d": 0.0133
+        },
+        {
+          "rank": 2,
+          "ticker": "MU",
+          "score": 0.6708,
+          "actualPercentile": 0.1556,
+          "next20dReturn": -0.1279,
+          "volatility20d": 0.0283
+        },
+        {
+          "rank": 3,
+          "ticker": "CDW",
+          "score": 0.6647,
+          "actualPercentile": 0.7556,
+          "next20dReturn": -0.0147,
+          "volatility20d": 0.0199
+        }
+      ],
+      "exposure": 1.0,
+      "portfolioReturn": -0.0638,
+      "spyReturn": -0.0205,
+      "universeReturn": -0.0465,
+      "excessReturnVsSpy": -0.0433,
+      "meanActualPercentile": 0.4444,
+      "beatMedianCount": 1
+    },
+    {
+      "date": "2024-12-30",
+      "picks": [
+        {
+          "rank": 1,
+          "ticker": "MSTR",
+          "score": 0.8571,
+          "actualPercentile": 0.8889,
+          "next20dReturn": 0.1226,
+          "volatility20d": 0.0655
+        },
+        {
+          "rank": 2,
+          "ticker": "SNPS",
+          "score": 0.6444,
+          "actualPercentile": 0.7222,
+          "next20dReturn": 0.0814,
+          "volatility20d": 0.0317
+        },
+        {
+          "rank": 3,
+          "ticker": "FTNT",
+          "score": 0.643,
+          "actualPercentile": 0.6333,
+          "next20dReturn": 0.061,
+          "volatility20d": 0.0162
+        }
+      ],
+      "exposure": 0.978,
+      "portfolioReturn": 0.0724,
+      "spyReturn": 0.0286,
+      "universeReturn": 0.0398,
+      "excessReturnVsSpy": 0.0438,
+      "meanActualPercentile": 0.7481,
+      "beatMedianCount": 3
+    },
+    {
+      "date": "2025-01-30",
+      "picks": [
+        {
+          "rank": 1,
+          "ticker": "SMCI",
+          "score": 0.8952,
+          "actualPercentile": 1.0,
+          "next20dReturn": 0.4476,
+          "volatility20d": 0.0525
+        },
+        {
+          "rank": 2,
+          "ticker": "GILD",
+          "score": 0.5945,
+          "actualPercentile": 0.9778,
+          "next20dReturn": 0.1791,
+          "volatility20d": 0.011
+        },
+        {
+          "rank": 3,
+          "ticker": "DXCM",
+          "score": 0.5861,
+          "actualPercentile": 0.5444,
+          "next20dReturn": 0.0086,
+          "volatility20d": 0.0198
+        }
+      ],
+      "exposure": 0.983,
+      "portfolioReturn": 0.1533,
+      "spyReturn": -0.0179,
+      "universeReturn": -0.0272,
+      "excessReturnVsSpy": 0.1712,
+      "meanActualPercentile": 0.8407,
+      "beatMedianCount": 3
+    },
+    {
+      "date": "2025-02-28",
+      "picks": [
+        {
+          "rank": 1,
+          "ticker": "NFLX",
+          "score": 0.6948,
+          "actualPercentile": 0.5333,
+          "next20dReturn": -0.0476,
+          "volatility20d": 0.0159
+        },
+        {
+          "rank": 2,
+          "ticker": "IDXX",
+          "score": 0.6392,
+          "actualPercentile": 0.5222,
+          "next20dReturn": -0.0486,
+          "volatility20d": 0.0294
+        },
+        {
+          "rank": 3,
+          "ticker": "BKR",
+          "score": 0.6353,
+          "actualPercentile": 0.6222,
+          "next20dReturn": -0.0339,
+          "volatility20d": 0.0197
+        }
+      ],
+      "exposure": 0.809,
+      "portfolioReturn": -0.0361,
+      "spyReturn": -0.062,
+      "universeReturn": -0.0626,
+      "excessReturnVsSpy": 0.0259,
+      "meanActualPercentile": 0.5593,
+      "beatMedianCount": 3
+    },
+    {
+      "date": "2025-03-28",
+      "picks": [
+        {
+          "rank": 1,
+          "ticker": "TSLA",
+          "score": 0.7156,
+          "actualPercentile": 0.8889,
+          "next20dReturn": 0.0847,
+          "volatility20d": 0.0606
+        },
+        {
+          "rank": 2,
+          "ticker": "GOOGL",
+          "score": 0.6979,
+          "actualPercentile": 0.7333,
+          "next20dReturn": 0.0407,
+          "volatility20d": 0.0226
+        },
+        {
+          "rank": 3,
+          "ticker": "SMCI",
+          "score": 0.693,
+          "actualPercentile": 0.9,
+          "next20dReturn": 0.0879,
+          "volatility20d": 0.067
+        }
+      ],
+      "exposure": 0.764,
+      "portfolioReturn": 0.0444,
+      "spyReturn": -0.0087,
+      "universeReturn": -0.0014,
+      "excessReturnVsSpy": 0.0531,
+      "meanActualPercentile": 0.8407,
+      "beatMedianCount": 3
+    },
+    {
+      "date": "2025-04-28",
+      "picks": [
+        {
+          "rank": 1,
+          "ticker": "TTWO",
+          "score": 0.6453,
+          "actualPercentile": 0.2111,
+          "next20dReturn": 0.0032,
+          "volatility20d": 0.0282
+        },
+        {
+          "rank": 2,
+          "ticker": "ADBE",
+          "score": 0.6174,
+          "actualPercentile": 0.6667,
+          "next20dReturn": 0.1207,
+          "volatility20d": 0.0276
+        },
+        {
+          "rank": 3,
+          "ticker": "ILMN",
+          "score": 0.6087,
+          "actualPercentile": 0.4111,
+          "next20dReturn": 0.0682,
+          "volatility20d": 0.0377
+        }
+      ],
+      "exposure": 0.76,
+      "portfolioReturn": 0.0476,
+      "spyReturn": 0.0732,
+      "universeReturn": 0.1104,
+      "excessReturnVsSpy": -0.0256,
+      "meanActualPercentile": 0.4296,
+      "beatMedianCount": 1
+    },
+    {
+      "date": "2025-05-27",
+      "picks": [
+        {
+          "rank": 1,
+          "ticker": "MSTR",
+          "score": 0.7097,
+          "actualPercentile": 0.6333,
+          "next20dReturn": 0.0443,
+          "volatility20d": 0.0317
+        },
+        {
+          "rank": 2,
+          "ticker": "MU",
+          "score": 0.7046,
+          "actualPercentile": 1.0,
+          "next20dReturn": 0.3203,
+          "volatility20d": 0.0258
+        },
+        {
+          "rank": 3,
+          "ticker": "ADP",
+          "score": 0.697,
+          "actualPercentile": 0.0889,
+          "next20dReturn": -0.0799,
+          "volatility20d": 0.0077
+        }
+      ],
+      "exposure": 0.751,
+      "portfolioReturn": 0.0119,
+      "spyReturn": 0.0301,
+      "universeReturn": 0.0254,
+      "excessReturnVsSpy": -0.0181,
+      "meanActualPercentile": 0.5741,
+      "beatMedianCount": 2
+    },
+    {
+      "date": "2025-06-25",
+      "picks": [
+        {
+          "rank": 1,
+          "ticker": "TEAM",
+          "score": 0.7246,
+          "actualPercentile": 0.2778,
+          "next20dReturn": 0.0074,
+          "volatility20d": 0.0247
+        },
+        {
+          "rank": 2,
+          "ticker": "LULU",
+          "score": 0.7094,
+          "actualPercentile": 0.1333,
+          "next20dReturn": -0.0554,
+          "volatility20d": 0.0471
+        },
+        {
+          "rank": 3,
+          "ticker": "ADBE",
+          "score": 0.6672,
+          "actualPercentile": 0.1778,
+          "next20dReturn": -0.0409,
+          "volatility20d": 0.0198
+        }
+      ],
+      "exposure": 0.751,
+      "portfolioReturn": -0.0208,
+      "spyReturn": 0.045,
+      "universeReturn": 0.0397,
+      "excessReturnVsSpy": -0.0658,
+      "meanActualPercentile": 0.1963,
+      "beatMedianCount": 0
+    },
+    {
+      "date": "2025-07-24",
+      "picks": [
+        {
+          "rank": 1,
+          "ticker": "MSFT",
+          "score": 0.6379,
+          "actualPercentile": 0.5556,
+          "next20dReturn": -0.0114,
+          "volatility20d": 0.0074
+        },
+        {
+          "rank": 2,
+          "ticker": "CRWD",
+          "score": 0.6325,
+          "actualPercentile": 0.1778,
+          "next20dReturn": -0.1038,
+          "volatility20d": 0.0206
+        },
+        {
+          "rank": 3,
+          "ticker": "AMAT",
+          "score": 0.6249,
+          "actualPercentile": 0.1111,
+          "next20dReturn": -0.1479,
+          "volatility20d": 0.014
+        }
+      ],
+      "exposure": 0.735,
+      "portfolioReturn": -0.0504,
+      "spyReturn": 0.0018,
+      "universeReturn": -0.0414,
+      "excessReturnVsSpy": -0.0522,
+      "meanActualPercentile": 0.2815,
+      "beatMedianCount": 1
+    },
+    {
+      "date": "2025-08-21",
+      "picks": [
+        {
+          "rank": 1,
+          "ticker": "MSFT",
+          "score": 0.7373,
+          "actualPercentile": 0.6222,
+          "next20dReturn": 0.0271,
+          "volatility20d": 0.0136
+        },
+        {
+          "rank": 2,
+          "ticker": "TTWO",
+          "score": 0.6272,
+          "actualPercentile": 0.8444,
+          "next20dReturn": 0.1008,
+          "volatility20d": 0.0175
+        },
+        {
+          "rank": 3,
+          "ticker": "SMCI",
+          "score": 0.6207,
+          "actualPercentile": 0.7667,
+          "next20dReturn": 0.0827,
+          "volatility20d": 0.0541
+        }
+      ],
+      "exposure": 0.769,
+      "portfolioReturn": 0.0467,
+      "spyReturn": 0.0472,
+      "universeReturn": 0.0244,
+      "excessReturnVsSpy": -0.0005,
+      "meanActualPercentile": 0.7444,
+      "beatMedianCount": 3
+    },
+    {
+      "date": "2025-09-19",
+      "picks": [
+        {
+          "rank": 1,
+          "ticker": "CPRT",
+          "score": 0.6115,
+          "actualPercentile": 0.3222,
+          "next20dReturn": -0.0329,
+          "volatility20d": 0.0164
+        },
+        {
+          "rank": 2,
+          "ticker": "TTWO",
+          "score": 0.6097,
+          "actualPercentile": 0.7444,
+          "next20dReturn": 0.0419,
+          "volatility20d": 0.0129
+        },
+        {
+          "rank": 3,
+          "ticker": "MSFT",
+          "score": 0.5946,
+          "actualPercentile": 0.5333,
+          "next20dReturn": -0.0084,
+          "volatility20d": 0.01
+        }
+      ],
+      "exposure": 0.76,
+      "portfolioReturn": 0.0001,
+      "spyReturn": 0.001,
+      "universeReturn": 0.0089,
+      "excessReturnVsSpy": -0.0009,
+      "meanActualPercentile": 0.5333,
+      "beatMedianCount": 2
+    },
+    {
+      "date": "2025-10-17",
+      "picks": [
+        {
+          "rank": 1,
+          "ticker": "MDB",
+          "score": 0.6724,
+          "actualPercentile": 0.8889,
+          "next20dReturn": 0.107,
+          "volatility20d": 0.0196
+        },
+        {
+          "rank": 2,
+          "ticker": "DDOG",
+          "score": 0.639,
+          "actualPercentile": 0.9556,
+          "next20dReturn": 0.2102,
+          "volatility20d": 0.0315
+        },
+        {
+          "rank": 3,
+          "ticker": "TTD",
+          "score": 0.6379,
+          "actualPercentile": 0.0667,
+          "next20dReturn": -0.1611,
+          "volatility20d": 0.0211
+        }
+      ],
+      "exposure": 0.755,
+      "portfolioReturn": 0.025,
+      "spyReturn": 0.0113,
+      "universeReturn": -0.0067,
+      "excessReturnVsSpy": 0.0137,
+      "meanActualPercentile": 0.637,
+      "beatMedianCount": 2
+    },
+    {
+      "date": "2025-11-14",
+      "picks": [
+        {
+          "rank": 1,
+          "ticker": "QCOM",
+          "score": 0.692,
+          "actualPercentile": 0.5667,
+          "next20dReturn": 0.0356,
+          "volatility20d": 0.0326
+        },
+        {
+          "rank": 2,
+          "ticker": "MRVL",
+          "score": 0.6537,
+          "actualPercentile": 0.3222,
+          "next20dReturn": -0.0253,
+          "volatility20d": 0.0322
+        },
+        {
+          "rank": 3,
+          "ticker": "MSFT",
+          "score": 0.6235,
+          "actualPercentile": 0.1667,
+          "next20dReturn": -0.0676,
+          "volatility20d": 0.0131
+        }
+      ],
+      "exposure": 0.757,
+      "portfolioReturn": -0.0278,
+      "spyReturn": 0.0131,
+      "universeReturn": 0.0302,
+      "excessReturnVsSpy": -0.0409,
+      "meanActualPercentile": 0.3519,
+      "beatMedianCount": 1
+    },
+    {
+      "date": "2025-12-15",
+      "picks": [
+        {
+          "rank": 1,
+          "ticker": "MSTR",
+          "score": 0.7792,
+          "actualPercentile": 0.8778,
+          "next20dReturn": 0.1064,
+          "volatility20d": 0.0446
+        },
+        {
+          "rank": 2,
+          "ticker": "DDOG",
+          "score": 0.6807,
+          "actualPercentile": 0.0222,
+          "next20dReturn": -0.1383,
+          "volatility20d": 0.0228
+        },
+        {
+          "rank": 3,
+          "ticker": "SMCI",
+          "score": 0.6525,
+          "actualPercentile": 0.0667,
+          "next20dReturn": -0.0988,
+          "volatility20d": 0.0309
+        }
+      ],
+      "exposure": 0.745,
+      "portfolioReturn": -0.053,
+      "spyReturn": 0.0171,
+      "universeReturn": 0.0206,
+      "excessReturnVsSpy": -0.0702,
+      "meanActualPercentile": 0.3222,
+      "beatMedianCount": 1
+    },
+    {
+      "date": "2026-01-14",
+      "picks": [
+        {
+          "rank": 1,
+          "ticker": "DDOG",
+          "score": 0.777,
+          "actualPercentile": 0.5889,
+          "next20dReturn": 0.0304,
+          "volatility20d": 0.024
+        },
+        {
+          "rank": 2,
+          "ticker": "AMAT",
+          "score": 0.7319,
+          "actualPercentile": 0.7778,
+          "next20dReturn": 0.0878,
+          "volatility20d": 0.0286
+        },
+        {
+          "rank": 3,
+          "ticker": "TEAM",
+          "score": 0.6839,
+          "actualPercentile": 0.0111,
+          "next20dReturn": -0.3446,
+          "volatility20d": 0.0275
+        }
+      ],
+      "exposure": 0.736,
+      "portfolioReturn": -0.0546,
+      "spyReturn": -0.0132,
+      "universeReturn": -0.0211,
+      "excessReturnVsSpy": -0.0414,
+      "meanActualPercentile": 0.4593,
+      "beatMedianCount": 2
+    },
+    {
+      "date": "2026-02-12",
+      "picks": [
+        {
+          "rank": 1,
+          "ticker": "WDAY",
+          "score": 0.708,
+          "actualPercentile": 0.2333,
+          "next20dReturn": -0.076,
+          "volatility20d": 0.0352
+        },
+        {
+          "rank": 2,
+          "ticker": "DLTR",
+          "score": 0.7014,
+          "actualPercentile": 0.0667,
+          "next20dReturn": -0.1633,
+          "volatility20d": 0.0232
+        },
+        {
+          "rank": 3,
+          "ticker": "INTU",
+          "score": 0.6832,
+          "actualPercentile": 0.9111,
+          "next20dReturn": 0.1055,
+          "volatility20d": 0.0344
+        }
+      ],
+      "exposure": 0.715,
+      "portfolioReturn": -0.0447,
+      "spyReturn": -0.0279,
+      "universeReturn": -0.0249,
+      "excessReturnVsSpy": -0.0169,
+      "meanActualPercentile": 0.4037,
+      "beatMedianCount": 1
+    },
+    {
+      "date": "2026-03-13",
+      "picks": [
+        {
+          "rank": 1,
+          "ticker": "INTU",
+          "score": 0.698,
+          "actualPercentile": 0.0667,
+          "next20dReturn": -0.1577,
+          "volatility20d": 0.0344
+        },
+        {
+          "rank": 2,
+          "ticker": "MNST",
+          "score": 0.6634,
+          "actualPercentile": 0.3889,
+          "next20dReturn": -0.0252,
+          "volatility20d": 0.0175
+        },
+        {
+          "rank": 3,
+          "ticker": "CDNS",
+          "score": 0.6624,
+          "actualPercentile": 0.5222,
+          "next20dReturn": 0.0041,
+          "volatility20d": 0.0314
+        }
+      ],
+      "exposure": 0.919,
+      "portfolioReturn": -0.0473,
+      "spyReturn": 0.0388,
+      "universeReturn": 0.0249,
+      "excessReturnVsSpy": -0.086,
+      "meanActualPercentile": 0.3259,
+      "beatMedianCount": 1
+    },
+    {
+      "date": "2026-04-13",
+      "picks": [
+        {
+          "rank": 1,
+          "ticker": "AXON",
+          "score": 0.776,
+          "actualPercentile": 0.6,
+          "next20dReturn": 0.0966,
+          "volatility20d": 0.0441
+        },
+        {
+          "rank": 2,
+          "ticker": "DDOG",
+          "score": 0.7257,
+          "actualPercentile": 0.9667,
+          "next20dReturn": 0.8379,
+          "volatility20d": 0.0332
+        },
+        {
+          "rank": 3,
+          "ticker": "MRNA",
+          "score": 0.7032,
+          "actualPercentile": 0.4889,
+          "next20dReturn": 0.0434,
+          "volatility20d": 0.0287
+        }
+      ],
+      "exposure": 0.912,
+      "portfolioReturn": 0.3,
+      "spyReturn": 0.0775,
+      "universeReturn": 0.1242,
+      "excessReturnVsSpy": 0.2224,
+      "meanActualPercentile": 0.6852,
+      "beatMedianCount": 2
+    },
+    {
+      "date": "2026-05-11",
+      "picks": [
+        {
+          "rank": 1,
+          "ticker": "DLTR",
+          "score": 0.7251,
+          "actualPercentile": 0.9556,
+          "next20dReturn": 0.2458,
+          "volatility20d": 0.0264
+        },
+        {
+          "rank": 2,
+          "ticker": "MRNA",
+          "score": 0.6763,
+          "actualPercentile": 0.1111,
+          "next20dReturn": -0.0974,
+          "volatility20d": 0.0401
+        },
+        {
+          "rank": 3,
+          "ticker": "INTU",
+          "score": 0.6347,
+          "actualPercentile": 0.0222,
+          "next20dReturn": -0.253,
+          "volatility20d": 0.0294
+        }
+      ],
+      "exposure": 0.451,
+      "portfolioReturn": -0.0088,
+      "spyReturn": -0.0001,
+      "universeReturn": 0.0202,
+      "excessReturnVsSpy": -0.0087,
+      "meanActualPercentile": 0.363,
+      "beatMedianCount": 1
+    },
+    {
+      "date": "2026-06-09",
+      "picks": [
+        {
+          "rank": 1,
+          "ticker": "MU",
+          "score": 0.7394,
+          "actualPercentile": 0.7111,
+          "next20dReturn": 0.0597,
+          "volatility20d": 0.0709
+        },
+        {
+          "rank": 2,
+          "ticker": "CDNS",
+          "score": 0.6655,
+          "actualPercentile": 0.4111,
+          "next20dReturn": -0.0127,
+          "volatility20d": 0.0375
+        },
+        {
+          "rank": 3,
+          "ticker": "FTNT",
+          "score": 0.6345,
+          "actualPercentile": 0.9333,
+          "next20dReturn": 0.1831,
+          "volatility20d": 0.0301
+        }
+      ],
+      "exposure": 0.455,
+      "portfolioReturn": 0.0398,
+      "spyReturn": 0.0225,
+      "universeReturn": 0.0254,
+      "excessReturnVsSpy": 0.0173,
+      "meanActualPercentile": 0.6852,
+      "beatMedianCount": 2
+    },
+    {
+      "date": "2026-07-09",
+      "picks": [
+        {
+          "rank": 1,
+          "ticker": "SMCI",
+          "score": 0.7457,
+          "actualPercentile": 0.5889,
+          "next20dReturn": 0.0404,
+          "volatility20d": 0.0889
+        },
+        {
+          "rank": 2,
+          "ticker": "CTAS",
+          "score": 0.6305,
+          "actualPercentile": 0.8556,
+          "next20dReturn": 0.1377,
+          "volatility20d": 0.0193
+        },
+        {
+          "rank": 3,
+          "ticker": "FTNT",
+          "score": 0.6242,
+          "actualPercentile": 0.3889,
+          "next20dReturn": -0.0221,
+          "volatility20d": 0.023
+        }
+      ],
+      "exposure": 0.445,
+      "portfolioReturn": 0.027,
+      "spyReturn": 0.0224,
+      "universeReturn": 0.0095,
+      "excessReturnVsSpy": 0.0046,
+      "meanActualPercentile": 0.6111,
+      "beatMedianCount": 2
+    }
+  ]
+}

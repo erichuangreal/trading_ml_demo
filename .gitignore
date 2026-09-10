@@ -36,6 +36,14 @@ yarn-error.log*
 # vercel
 .vercel
 
+# agent tooling, not part of the website
+.agents/
+.claude/
+.codex/
+.impeccable/
+PRODUCT.md
+DESIGN.md
+
 # typescript
 *.tsbuildinfo
 next-env.d.ts

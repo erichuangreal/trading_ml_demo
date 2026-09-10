@@ -1,0 +1,70 @@
+{
+  "sample": false,
+  "source": "trading_ml/models/v4xgboost_walkforward_2026-08-26_22-53-59 (final saved walk-forward run)",
+  "testStart": "2023-01-03",
+  "testEnd": "2026-07-09",
+  "rebalancePeriods": 45,
+  "universeSize": 90,
+  "topN": 3,
+  "rebalanceDays": 20,
+  "model": "XGBoost",
+  "trainTarget": "beats_median_20d (classifier)",
+  "positionSizing": "inverse-volatility, scaled to a 17.3% annualized vol target (clip 20%-100% exposure)",
+  "transactionCostsIncluded": true,
+  "roundTripCostBps": 15.0,
+  "returns": {
+    "topThreeAnnualized": 0.3382309799632899,
+    "spyAnnualized": 0.24275952278620072,
+    "universeAnnualized": 0.287720937517812
+  },
+  "sharpe": {
+    "topThree": 1.1538015349727369,
+    "spy": 1.7674098452415634,
+    "universe": 1.5065436293251746
+  },
+  "excessReturn": {
+    "vsSpy": 0.09547145717708916,
+    "vsUniverse": 0.050510042445477854
+  },
+  "sortingEdge": 0.01851851851851849,
+  "rankAccuracy": 0.5185185185185185,
+  "topMinusBottomSpreadBps": 259.0370880306227,
+  "meanActualPercentileTopThree": 0.5474074074074075,
+  "pctTopThreeBeatingMedian": 0.6074074074074074,
+  "realizedVolatility": {
+    "topThree": 0.25545390117336186,
+    "spy": 0.12403434673484194,
+    "universe": 0.16954604290976347
+  },
+  "strategyComparison": [
+    {
+      "strategy": "Top 1",
+      "annualizedReturn": 0.43748906070743643,
+      "sharpe": 1.3059329142865643,
+      "meanExposure": 0.5363732247595799,
+      "sortingSpreadBps": 4.561273077187443
+    },
+    {
+      "strategy": "Top 3",
+      "annualizedReturn": 0.3382309799632899,
+      "sharpe": 1.1538015349727369,
+      "meanExposure": 0.7827323443299689,
+      "sortingSpreadBps": 259.0370880306227
+    },
+    {
+      "strategy": "Top 15",
+      "annualizedReturn": 0.24133298292250083,
+      "sharpe": 1.1857647730023737,
+      "meanExposure": 0.9331262627558863,
+      "sortingSpreadBps": 60.06122446305537
+    }
+  ],
+  "significance": {
+    "sortingEdgeTStat": 2.19,
+    "returnVsSpyTStat": 0.66,
+    "returnVsSpyPValue": 0.51,
+    "periodsWonVsSpy": 20,
+    "periodsTotal": 45,
+    "note": "From trading_ml's README: the sorting edge (+1.85pp, t=2.19) is statistically significant across the 45 independent rebalance periods. The raw outperformance vs SPY is not (t=0.66, p=0.51); Top 3 beat SPY in 20 of 45 periods."
+  }
+}
