@@ -55,10 +55,23 @@ export function AppShell({
   predictions: PredictionsData | null;
   modelInfo: ModelInfo | null;
 }) {
-  const [view, setView] = useState<ViewId>(() => readFromLocation().view);
-  const [rebalance, setRebalanceState] = useState<string | null>(() => readFromLocation().rebalance);
+  // Server has no window, so it always renders the deterministic default.
+  // Reading the real URL has to wait for a client-only effect after mount,
+  // matching that same default, or the hydrated client tree would mismatch
+  // the server-rendered HTML on any deep link (?view=... / ?rebalance=...)
+  // and React would throw a hydration error.
+  const [view, setView] = useState<ViewId>("overview");
+  const [rebalance, setRebalanceState] = useState<string | null>(null);
 
   useEffect(() => {
+    // Deliberate one-time sync from the URL (a genuinely external, non-React
+    // data source) into React state right after mount; this can't happen
+    // during render without risking the hydration mismatch described above.
+    const initial = readFromLocation();
+    // eslint-disable-next-line react-hooks/set-state-in-effect
+    setView(initial.view);
+    setRebalanceState(initial.rebalance);
+
     function onPopState() {
       const next = readFromLocation();
       setView(next.view);

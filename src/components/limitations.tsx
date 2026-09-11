@@ -1,6 +1,3 @@
-"use client";
-
-import { useState } from "react";
 import { UncertaintyGlyph } from "./icons/glyphs";
 
 const HEADLINE = [
@@ -18,32 +15,7 @@ const HEADLINE = [
   },
 ];
 
-const MORE = [
-  {
-    title: "Small sample",
-    detail: "45 non-overlapping rebalances over 2023–2026, enough for the ranking edge to clear significance, not enough to make strong claims about the return figures.",
-  },
-  {
-    title: "Regime dependence",
-    detail: "The test window is one specific market period. Feature-return relationships learned here may not hold in a different regime.",
-  },
-  {
-    title: "Signal decay",
-    detail: "Ranking edges commonly shrink as market conditions and participants change; nothing here re-validates the model against new data automatically.",
-  },
-  {
-    title: "Volatility-target lag",
-    detail: "Exposure is sized off trailing realized volatility, which lags true forward risk. Realized volatility ran above the 17.3% target the basket was sized to.",
-  },
-  {
-    title: "Universe construction",
-    detail: "The ~90-name universe reflects the dataset's current membership, not a strictly point-in-time historical index list; some hindsight in \"what counted as the universe\" is possible.",
-  },
-];
-
 export function Limitations() {
-  const [showAll, setShowAll] = useState(false);
-
   return (
     <div>
       <h2 className="flex items-center gap-2 text-2xl font-semibold tracking-tight text-foreground sm:text-3xl">
@@ -59,25 +31,6 @@ export function Limitations() {
           </div>
         ))}
       </div>
-
-      {showAll ? (
-        <div className="mt-6 grid gap-x-8 gap-y-6 border-t border-border pt-6 sm:grid-cols-2">
-          {MORE.map((item) => (
-            <div key={item.title}>
-              <h3 className="text-[0.85rem] font-medium text-foreground">{item.title}</h3>
-              <p className="mt-1 text-[0.8rem] leading-relaxed text-muted">{item.detail}</p>
-            </div>
-          ))}
-        </div>
-      ) : null}
-
-      <button
-        type="button"
-        onClick={() => setShowAll((v) => !v)}
-        className="mt-6 font-mono text-[0.75rem] text-accent underline decoration-accent/40 underline-offset-4 hover:decoration-accent"
-      >
-        {showAll ? "Show fewer" : `Show ${MORE.length} more`}
-      </button>
 
       <p className="mt-10 max-w-2xl border-t border-border pt-6 text-[0.8rem] leading-relaxed text-subtle">
         This project is presented for research and engineering demonstration

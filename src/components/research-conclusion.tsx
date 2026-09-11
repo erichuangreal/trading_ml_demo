@@ -55,22 +55,6 @@ export function ResearchConclusion({ metrics }: { metrics: MetricsData | null })
           </ul>
         </div>
       </div>
-
-      <div className="mt-10 max-w-3xl border-t border-border pt-6">
-        <h3 className="text-[0.9rem] font-medium text-foreground">What this suggests, and what I&apos;d try next</h3>
-        <p className="mt-3 text-[0.9rem] leading-relaxed text-muted">
-          The most defensible result here is the cross-sectional sorting signal, not
-          the raw backtest headline return. The ranking edge clears a conventional
-          significance bar across 45 non-overlapping periods; the return advantage
-          over SPY does not, and I&apos;m not going to describe one saved backtest&apos;s
-          t-statistic as proof of anything beyond that specific test. A Top-3 basket
-          is also a genuinely concentrated bet: most of its return variance comes from
-          broad market exposure, not stock selection, so a larger basket, or an
-          explicit hedge against the market, feels like a more promising way to express
-          the same ranking signal than trusting the headline number on its own. That&apos;s
-          the next thing I want to try.
-        </p>
-      </div>
     </div>
   );
 }
