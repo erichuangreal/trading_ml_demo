@@ -16,6 +16,18 @@ export function SiteFooter() {
   return (
     <footer className="border-t border-border">
       <div className="mx-auto flex w-full max-w-5xl flex-col gap-6 px-6 py-12 sm:px-8">
+        <p className="text-[0.85rem] text-muted">
+          Powered by{" "}
+          <a
+            href="https://github.com/erichuangreal"
+            target="_blank"
+            rel="noreferrer"
+            className="font-medium text-foreground underline decoration-border underline-offset-4 hover:decoration-accent"
+          >
+            Eric Huang
+          </a>
+        </p>
+
         <div className="flex flex-wrap gap-1.5">
           {STACK.map((item) => (
             <span
@@ -30,7 +42,7 @@ export function SiteFooter() {
         <div className="flex flex-col gap-2 text-[0.8rem] text-subtle sm:flex-row sm:items-center sm:justify-between">
           <p>Quantitative ML research project · historical analysis only, not investment advice.</p>
           <p>
-            This site renders exported historical results only — the model training code
+            This site renders exported historical results. The model training code
             lives in a{" "}
             <a
               href="https://github.com/erichuangreal/trading_ml"

@@ -109,14 +109,14 @@ export function OverviewPage({ metrics, predictions, selectRebalance, navigate }
       <div className="grid gap-12 md:grid-cols-[1.15fr_1fr] md:gap-16">
         <div>
           <h1 className="max-w-xl text-[2rem] font-semibold leading-[1.12] tracking-tight text-foreground sm:text-[2.6rem]">
-            I taught a model to rank stocks. Then I checked if it actually worked.
+            I taught a model to rank stocks. It edged out the S&P!
           </h1>
 
           <p className="mt-6 max-w-lg text-[1.02rem] leading-relaxed text-muted">
             This is a personal project I built and tested in my own time: an XGBoost
             classifier that ranks a universe of equities every 20 trading days and
             bets on the top 3, sized so no single name can dominate the basket. Everything
-            on this site is a real, out-of-sample historical result — I wanted to see
+            on this site is a real, out-of-sample historical result. I wanted to see
             what the model actually did, not just what it was supposed to do.
           </p>
 
@@ -135,7 +135,7 @@ export function OverviewPage({ metrics, predictions, selectRebalance, navigate }
           {metrics ? (
             <p className="mt-6 max-w-lg text-[0.9rem] leading-relaxed text-subtle">
               Headline numbers: {formatPercent(metrics.returns.topThreeAnnualized, 1)} annualized
-              return against SPY&apos;s {formatPercent(metrics.returns.spyAnnualized, 1)} — but a
+              return against SPY&apos;s {formatPercent(metrics.returns.spyAnnualized, 1)}, but a
               lower Sharpe ratio ({formatDecimal(metrics.sharpe.topThree, 2)} vs.{" "}
               {formatDecimal(metrics.sharpe.spy, 2)}). The honest read is on{" "}
               <button
@@ -152,7 +152,7 @@ export function OverviewPage({ metrics, predictions, selectRebalance, navigate }
           <div className="mt-8 flex items-center gap-2.5 border-l-2 border-accent/50 pl-3">
             <Vane state="idle" size={26} />
             <p className="text-[0.85rem] text-subtle">
-              That&apos;s Vane — it&apos;ll point at whatever the model&apos;s watching as you explore.
+              That&apos;s Vane: it&apos;ll point at whatever the model&apos;s watching as you explore.
             </p>
           </div>
 
