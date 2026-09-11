@@ -1,12 +1,19 @@
 # ML Equity Ranking System — Public Demo
 
+## Run it locally
+
+```bash
+npm install
+npm run dev       # then open http://localhost:3000
+```
+
 An interactive research-memo-style frontend for a private machine-learning
 equity-ranking project. It presents the model's methodology, walk-forward
 validation, historical decisions, and results — critically, including where
 the results fall short — to a technical audience (recruiters, engineers,
 quant researchers) without exposing the underlying research implementation.
 
-[Live demo](#) · [Screenshot](#)
+[Live demo](https://trading-ml-demo.vercel.app/) · [Screenshot](#)
 
 > This is a research and engineering portfolio project. It is not a trading
 > platform, brokerage, signal service, or investment recommendation. Every

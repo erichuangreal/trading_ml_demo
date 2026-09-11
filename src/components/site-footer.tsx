@@ -30,8 +30,17 @@ export function SiteFooter() {
         <div className="flex flex-col gap-2 text-[0.8rem] text-subtle sm:flex-row sm:items-center sm:justify-between">
           <p>Quantitative ML research project · historical analysis only, not investment advice.</p>
           <p>
-            Model research and training implementation kept private; this site presents
-            exported historical results only.
+            This site renders exported historical results only — the model training code
+            lives in a{" "}
+            <a
+              href="https://github.com/erichuangreal/trading_ml"
+              target="_blank"
+              rel="noreferrer"
+              className="underline decoration-border underline-offset-4 hover:text-foreground hover:decoration-accent"
+            >
+              separate repo
+            </a>
+            .
           </p>
         </div>
 

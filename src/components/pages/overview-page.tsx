@@ -172,12 +172,20 @@ export function OverviewPage({ metrics, predictions, selectRebalance, navigate }
               See how it&apos;s built
             </button>
             <a
+              href="https://github.com/erichuangreal/trading_ml"
+              target="_blank"
+              rel="noreferrer"
+              className="text-muted underline decoration-border underline-offset-4 hover:text-foreground hover:decoration-accent"
+            >
+              See the model &amp; training code
+            </a>
+            <a
               href="https://github.com/erichuangreal/trading_ml_demo"
               target="_blank"
               rel="noreferrer"
               className="text-muted underline decoration-border underline-offset-4 hover:text-foreground hover:decoration-accent"
             >
-              View source
+              View this site&apos;s source
             </a>
           </div>
         </div>
