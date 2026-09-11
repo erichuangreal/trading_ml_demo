@@ -18,6 +18,10 @@ A public, recruiter-facing interactive demo/visualization of an existing machine
 
 This is a portfolio/engineering-demonstration site, explicitly not a trading product. It presents itself with the visual and intellectual honesty of quantitative research / institutional analytics rather than retail trading or fintech marketing — critical self-assessment of results (e.g., lower Sharpe than SPY despite higher absolute return) is part of the credibility story, not something to hide.
 
+## Brand Commitments
+
+This is presented explicitly as Eric's own personal project, built in his own time — not an anonymous case study or a corporate product. Confirmed voice: creative, semi-formal, personal, and confident; first person where it's about the work and the process. The tone should read as curiosity and ownership of the engineering, pride in the finished result, honest interpretation of what the results do and don't show, and an openness about wanting to keep improving it — not academic distance, not sales copy, not false modesty. Visual identity (dark background, amber accent) is a confirmed, binding foundation to preserve across any redesign; see DESIGN.md for its current expression. Personal-motivation anecdotes ("why I built this," specific stories) are never fabricated — real wording only, or omitted.
+
 ## Operating Context
 
 - **Repository split:** The ML implementation (training, feature engineering, walk-forward backtesting, saved runs) lives in a separate private repository, `trading_ml` (sibling directory `../trading_ml`, read-only from this repo). This repository, `trading_ml_demo`, is presentation-only and must not require runtime access to the private repo.

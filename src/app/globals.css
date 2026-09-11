@@ -11,6 +11,7 @@
   --accent: #caa057;
   --accent-strong: #e2b96f;
   --accent-foreground: #171208;
+  --accent-glow: rgba(202, 160, 87, 0.35);
   --positive: #7fae82;
   --negative: #c9776f;
   --font-sans: var(--font-geist-sans);
@@ -28,6 +29,7 @@
   --color-accent: var(--accent);
   --color-accent-strong: var(--accent-strong);
   --color-accent-foreground: var(--accent-foreground);
+  --color-accent-glow: var(--accent-glow);
   --color-positive: var(--positive);
   --color-negative: var(--negative);
   --font-sans: var(--font-geist-sans);
@@ -81,4 +83,15 @@ body {
 .tabular-figures {
   font-variant-numeric: tabular-nums;
   font-feature-settings: "tnum" 1;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
+  }
 }

@@ -1,4 +1,4 @@
-import { Section, SectionHeading } from "./ui/section";
+import { SectionHeading } from "./ui/section";
 
 const ROWS = [
   { train: 30, gap: 4, test: 8 },
@@ -9,7 +9,7 @@ const ROWS = [
 
 export function WalkForwardDiagram() {
   return (
-    <Section id="walk-forward">
+    <div>
       <SectionHeading
         title="Walk-forward validation"
         lede="At every refit, only data from before a 20-day embargo is used for training; the model is then scored on the period immediately after. The window expands and slides forward through the whole test range — never a single random train/test split."
@@ -62,6 +62,6 @@ export function WalkForwardDiagram() {
         cost of a smaller effective sample: 45 independent, non-overlapping
         periods across 2023–2026.
       </p>
-    </Section>
+    </div>
   );
 }

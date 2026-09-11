@@ -1,4 +1,4 @@
-import { Section, SectionHeading } from "./ui/section";
+import { SectionHeading } from "./ui/section";
 import { formatPercent } from "@/lib/format";
 import type { MetricsData } from "@/lib/types";
 
@@ -12,7 +12,7 @@ const STEPS = [
 
 export function PortfolioConstruction({ metrics }: { metrics: MetricsData | null }) {
   return (
-    <Section id="construction">
+    <div>
       <SectionHeading
         title="Portfolio construction is a separate decision from ranking"
         lede="The model only decides order. Everything below is a risk-management layer applied after the ranking, and it can be changed without retraining anything."
@@ -46,14 +46,11 @@ export function PortfolioConstruction({ metrics }: { metrics: MetricsData | null
               {formatPercent(metrics.realizedVolatility.topThree, 1)}
             </span>{" "}
             annualized volatility — above target, since exposure is sized off
-            trailing realized volatility, which lags true forward risk. See{" "}
-            <a href="#limitations" className="underline decoration-border underline-offset-4 hover:decoration-accent">
-              limitations
-            </a>
-            .
+            trailing realized volatility, which lags true forward risk. See
+            What I Learned for the full limitations list.
           </>
         ) : null}
       </p>
-    </Section>
+    </div>
   );
 }

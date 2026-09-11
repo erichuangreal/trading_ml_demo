@@ -1,4 +1,4 @@
-import { Section, SectionHeading } from "./ui/section";
+import { SectionHeading } from "./ui/section";
 import { formatDecimal, formatPercent, formatSignedPercent } from "@/lib/format";
 import type { MetricsData } from "@/lib/types";
 
@@ -36,17 +36,17 @@ function Row({
 export function ExecutiveResult({ metrics }: { metrics: MetricsData | null }) {
   if (!metrics) {
     return (
-      <Section id="results">
+      <div>
         <SectionHeading title="Executive result" />
         <p className="text-sm text-muted">Metrics unavailable — public/data/metrics.json is missing.</p>
-      </Section>
+      </div>
     );
   }
 
   const { returns, sharpe, significance } = metrics;
 
   return (
-    <Section id="results">
+    <div>
       <SectionHeading title="Executive result" />
 
       <p className="max-w-3xl text-xl font-medium leading-snug text-foreground sm:text-2xl">
@@ -107,13 +107,9 @@ export function ExecutiveResult({ metrics }: { metrics: MetricsData | null }) {
           The cross-sectional sorting edge behind the picks is stronger evidence:{" "}
           {formatSignedPercent(metrics.sortingEdge, 2)} rank-accuracy edge at t&nbsp;=&nbsp;
           {formatDecimal(significance.sortingEdgeTStat, 2)}, significant across{" "}
-          {significance.periodsTotal} periods. See{" "}
-          <a href="#ranking-quality" className="underline decoration-border underline-offset-4 hover:decoration-accent">
-            ranking quality
-          </a>
-          .
+          {significance.periodsTotal} periods — see Does It Work? for the full case.
         </p>
       </div>
-    </Section>
+    </div>
   );
 }

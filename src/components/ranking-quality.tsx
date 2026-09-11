@@ -1,4 +1,3 @@
-import { Section, SectionHeading } from "./ui/section";
 import { Stat } from "./ui/stat";
 import { formatDecimal, formatPercent, formatSignedPercent } from "@/lib/format";
 import type { MetricsData, PredictionsData } from "@/lib/types";
@@ -45,12 +44,7 @@ export function RankingQuality({
   if (!metrics) return null;
 
   return (
-    <Section id="ranking-quality">
-      <SectionHeading
-        title="Does the ranking signal work?"
-        lede="Portfolio returns mix two things: whether the model can sort stocks against each other, and how much market exposure the resulting basket happened to carry. This section isolates the first question."
-      />
-
+    <div>
       <div className="grid gap-6 border border-border sm:grid-cols-3 sm:divide-x sm:divide-border">
         <div className="p-5">
           <Stat
@@ -98,11 +92,7 @@ export function RankingQuality({
         <p className="mt-1 max-w-xl text-[0.85rem] leading-relaxed text-muted">
           The same ranking, held at three different concentrations. Top 1 earns
           more on average but the extra return over Top 3 is not statistically
-          distinguishable from luck (see{" "}
-          <a href="#conclusion" className="underline decoration-border underline-offset-4 hover:decoration-accent">
-            results interpretation
-          </a>
-          ).
+          distinguishable from luck — see What I Learned for the full interpretation.
         </p>
         <table className="mt-4 w-full min-w-[420px] border-collapse">
           <thead>
@@ -146,6 +136,6 @@ export function RankingQuality({
           </tbody>
         </table>
       </div>
-    </Section>
+    </div>
   );
 }

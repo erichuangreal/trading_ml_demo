@@ -37,6 +37,18 @@ export function formatShortDate(value: string | undefined | null): string {
   });
 }
 
+/** Month + day only (e.g. "Jan 3") — enough to distinguish same-month rebalances in a compact chip strip. */
+export function formatChipDate(value: string | undefined | null): string {
+  if (!value) return "N/A";
+  const d = new Date(`${value}T00:00:00Z`);
+  if (Number.isNaN(d.getTime())) return value;
+  return d.toLocaleDateString("en-US", {
+    month: "short",
+    day: "numeric",
+    timeZone: "UTC",
+  });
+}
+
 export function formatDateRange(start: string | undefined | null, end: string | undefined | null): string {
   return `${formatDate(start)} – ${formatDate(end)}`;
 }

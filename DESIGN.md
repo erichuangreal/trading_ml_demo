@@ -1,7 +1,7 @@
 ---
 name: ML Equity Ranking System
-description: A dense, hairline-bordered dark dashboard with a single amber accent — quantitative-research precision, not decoration. Restructured from one long scroll into a persistent top-nav + five pages.
-status: PROPOSED — reverting from the "Live Board" direction back to the original dark/amber system (the first commit) per explicit instruction, and adding a persistent top-nav + five-page split in place of the single long scroll. Code has been reverted to the original visual system already (working tree matches commit 50b3ec2); the page-split and limitations trim described below are NOT yet built — this document only, per instruction.
+description: Dark/amber research-instrument identity, evolved with one character ("Vane," a seeking compass-needle), a shared symbol language, and five distinctly composed pages in place of one long scroll.
+status: SHIPPED — verified against the built code (2026-09-10): five pages, Vane, the tick-based glyph set, and per-page composition are all live; lint/typecheck/build clean; graph-click <-> explorer linking, Back/Forward, deep-links, and invalid-view fallback confirmed via interaction testing.
 colors:
   background: "#0A0A0B"
   background-raised: "#131316"
@@ -13,131 +13,164 @@ colors:
   accent: "#CAA057"
   accent-strong: "#E2B96F"
   accent-foreground: "#171208"
+  accent-glow: "rgba(202,160,87,0.35)"
   positive: "#7FAE82"
   negative: "#C9776F"
 typography:
   sans: { family: "Geist, ui-sans-serif, sans-serif", weight: [400,500,600] }
   mono: { family: "Geist Mono, ui-monospace, monospace", weight: 400, feature: "tnum 1" }
-radius: { chip: "4px (Tailwind default 'rounded', tags/code/tooltips only)", container: "0px (structural blocks are square-cornered)" }
-shadow: none — flat hairline borders only, deliberately no elevation
+radius: { chip: "4px (Tailwind default 'rounded')", container: "0px (structural blocks stay square-cornered)" }
+shadow: none — hairline borders and the accent glow are the only depth cues
 motion:
-  page-transition: "180ms opacity crossfade, no layout animation, no reorder gesture"
+  library: framer-motion
+  page-transition: "220ms opacity/y crossfade"
+  character: "spring-based rotation/opacity on Vane; idle sweep, point, travel, rest states"
+  reveal: "outcome reveal is a deliberate step (button/keypress), not a hover or an autoplay"
 ---
 
 # Design Brief: ML Equity Ranking System
 
 ## 1. Project purpose and design thesis
 
-A personal quantitative-research case study, presented with the restraint of an internal research memo: dark ground, one accent color used sparingly, hairline borders, tabular data given real typographic weight. The credibility comes from precision and honesty, not from decoration.
+A personal quantitative-research case study, presented the way its builder actually feels about it: proud, curious, precise. The dark/amber "research instrument" identity from the very first build stays — it's recognizable and it suits the subject — but it no longer has to mean "restrained to the point of anonymous." Personality lives in one consistent character and a small family of project-specific symbols, not in decoration bolted onto panels.
 
-**Design thesis: The Research Memo.** Square-cornered hairline-bordered blocks, one amber accent reserved for the headline number and active/focus states, everything else in foreground/muted/subtle grays. Motion is minimal and functional (page transitions only) — the design earns trust by being calm and legible, not by being lively.
+**Design thesis: The Instrument and Its Needle.** The existing visual world already reads like a precision instrument — hairline borders, tabular data, a single glowing accent, the walk-forward diagram's train/embargo/test ticks. This round leans into that literally: introduces **Vane**, a small amber compass-needle character that seeks and points at signal, built from the same "tick" primitive as a new shared symbol set (rank, narrow-to-three, feature, time/embargo, evaluate, uncertainty, compare). Character, icons, and charts are all one family — a needle is a rank-tick is a nav glyph is Vane's own body.
 
-**This reverts the "Live Board" direction** (indigo/coral, rounded-16px cards, layout-reorder animation, three-font system) which shipped and was then explicitly rejected. Do not reintroduce indigo/coral, rounded cards, medal-tint chips, or reorder/layout animation — those belong to the superseded direction (preserved in git stash, not deleted, in case it's ever wanted again, but not part of this direction).
+**Superseded from the prior round:** "not heavily animated," "page transitions only," "no visual or copy changes," "every component must remain unchanged," "the design earns trust by not being lively." Those were the right call for a narrow reorg; they are not a ceiling on this round. What's still true: no §-numbering/footnote/paper language, no trading-terminal ticker tape, no reintroduction of the Live Board's indigo/coral/rounded-16px/medal-tint system (that direction is stashed, not part of this one).
 
-**Explicitly not:** an academic paper (no §-numbering, footnotes, abstract block, citation language), a trading terminal or ticker tape, colorful/playful, or heavily animated.
-
-**Feeling to hit:** rigor, precision, quiet confidence — a builder who understands their work well enough to present it plainly.
+**Feeling to hit:** curiosity, ownership, pride, and honesty about limits — a builder who understands the work well enough to make it fun to explore, not just legible.
 
 ## 2. Verified content and data constraints
 
-Unchanged — all four `public/data/*.json` files are real (`"sample": false`), sourced from `metrics.json.source`. Nothing here has changed from prior verification.
+All four `public/data/*.json` files are real (`"sample": false"`), from the private repo's final saved walk-forward run. Nothing here has changed.
 
 | File | Verified fields | Supports |
 |---|---|---|
-| `metrics.json` | returns/Sharpe (model/SPY/universe), excess return, sorting edge, rank accuracy, significance, Top-1/3/15 comparison | Executive result, ranking-quality stats |
-| `equity_curve.json` | 46-pt normalized series, model/SPY/universe | Performance chart |
-| `predictions.json` | 45 rebalances × 3 real picks: ticker, score, realized percentile, next-20d return, per-period returns, exposure | Historical decision explorer, scatter |
-| `model_info.json` | model type, universe size, 34 features / 10 families, validation method | Feature system, model pipeline |
+| `metrics.json` | returns/Sharpe (model/SPY/universe), excess return, sorting edge, rank accuracy, significance, Top-1/3/15 comparison | Overview headline, Performance, Does It Work? stats |
+| `equity_curve.json` | 46-pt series (model/SPY/universe), sampled only at rebalance dates | Performance chart, derived per-rebalance drawdown |
+| `predictions.json` | 45 rebalances × 3 real picks: ticker, score, realized percentile, next-20d return, exposure, portfolio/SPY/universe returns | Does It Work? explorer, Overview mini-demo |
+| `model_info.json` | model type, universe size, 34 features / 10 families, validation method | How It's Built |
+
+**Critical mapping, verified against real records (periods 0, 1, 44):** `equity_curve.series[i]` is the portfolio's NAV *entering* `predictions.periods[i]` (same date); `equity_curve.series[i+1]` is its NAV after that period's 20-day hold — `predictions.periods[i].portfolioReturn` reconciles exactly with `series[i+1]/series[i] - 1`. The 46th equity point (2026-08-06) closes period 44 but starts no period of its own — it is not a selectable graph point in the explorer link (§6). Any derived drawdown is therefore sampled only at 20-trading-day rebalance marks, not daily, and must say so wherever it's labeled.
 
 No live data; no result outside the one cited run; nothing invented.
 
-## 3. Information architecture — the actual change requested
+## 3. Information architecture
 
-**Before:** one persistent header + eleven sections stacked in a single long scroll (Research Header → Executive Result → Performance Chart → Ranking Quality → Historical Decision Explorer → Model Pipeline → Walk-Forward Diagram → Feature System → Portfolio Construction → Research Conclusion → Limitations → Site Footer).
+Persistent top nav, five pages, URL-synced with real browser history (`pushState`, not `replaceState`, for page navigation — Back/Forward must retrace actual visits). A `?rebalance=` param carries the selected historical date between Performance and Does It Work?.
 
-**After:** a persistent top nav with five pages, URL-synced (`?view=`), reusing every existing section verbatim — this is a reorganization of already-built content, not new content. All five pages ship at once (no deferral): everything they need already exists in code today.
-
-| Page | Question | Contains (existing components, unmodified) |
+| Page | Question | Composition idea (see §6) |
 |---|---|---|
-| **Overview** | What is this, in 30 seconds? | Research Header (hero + headline stat block) + Executive Result |
-| **Performance** | How did it actually do? | Performance Chart |
-| **Does It Work?** | Is the ranking real, or luck? | Ranking Quality (stats + scatter) + Historical Decision Explorer |
-| **How It's Built** | What's under the hood? | Model Pipeline + Walk-Forward Diagram + Feature System + Portfolio Construction |
-| **What I Learned** | Honest takeaway + reflection | Research Conclusion ("Results interpretation") + Limitations (trimmed to 3, see §7) |
+| **Overview** | What did I build, and why is it worth exploring? | Asymmetric hero: headline + Vane's introduction on one side, a compact real mini-demo (one rebalance, three picks, one outcome) on the other. No stat-row-plus-card-grid. |
+| **Performance** | How did it actually do? | The equity chart is the page — full-width, tall, annotated, clickable points. Benchmark table and derived drawdown live below as a quieter reading pass, not another card grid. |
+| **Does It Work?** | Is the ranking real, or luck? | Two-part: a compact statistical case up top (rank accuracy, spread, significance — dense, small, confident), then the full-width interactive pick explorer as the page's real center of gravity. |
+| **How It's Built** | What's under the hood? | A single continuous horizontal pipeline diagram (data → features → training → ranking → sizing → hold) that Vane travels along; each stage expands in place for depth instead of eight identical cards. |
+| **What I Learned** | Honest takeaway, in my own words | Editorial, quiet, generous whitespace — first-person reflection, Vane at rest in a corner, limitations as progressive disclosure rather than a grid of ten. |
 
-Site Footer stays persistent under every page, as it is today.
+## 4. The character — Vane
 
-## 4. Navigation and page-transition behavior
+**What it is:** a slim amber needle on a pivot, like a compass or a weathervane arrow — not an animal, not a robot, not an emoji, not a floating chat bubble. It's built from the same tick-glyph primitive as the symbol set (§5), so it reads as *of* this system rather than pasted onto it. Justification for the metaphor: the whole project is about seeking a signal and pointing at what ranks highest — a needle that swings toward the strongest reading is the literal mechanism, not a decorative animal standing in for it.
 
-- **Top nav:** a persistent header row above the existing per-page header content — site name/logo on the left, five page labels as plain text (not pills/chips — no rounded-full treatment, consistent with the square-cornered system), active page marked with the amber accent (color + a 1px underline), inactive pages in `muted`. No sliding/animated indicator — a static color change is enough; this direction does not do layout-animation chrome.
-- **URL sync:** `?view=overview|performance|does-it-work|how-its-built|what-i-learned`, same `replaceState` pattern already proven in this codebase.
-- **Transition:** the outgoing page content fades out and the new one fades in, ~180ms opacity-only crossfade, no slide/scale/layout animation. `prefers-reduced-motion` removes the crossfade entirely (instant swap) — same as fading, just duration 0.
-- **Mobile:** nav row scrolls horizontally rather than wrapping (proven pattern from the prior build); logo truncates before nav labels do.
+**Personality:** curious, quietly confident, never smug. It searches before it settles — a small wobble before it commits to a direction — and it holds still and dims when the visitor is reading rather than choosing.
 
-## 5. Visual system
+**States (one reusable asset, four poses via rotation/opacity/glow, not four separate drawings):**
+1. **Idle** — gentle ±12° sweep, low glow. Default/persistent, small, in the nav corner on every page.
+2. **Alert / pointing** — snaps toward a target (a rank-1 pick, the newest chart point), glow brightens, tiny overshoot-and-settle.
+3. **Traveling** — moves along a path (the How It's Built pipeline) with a short fading trail behind it, like a compass needle sliding along a bearing.
+4. **Resting** — dimmed, minimal sweep, on What I Learned and anywhere dense reading needs to stay uninterrupted.
 
-| Role | Value |
-|---|---|
-| Background / Raised panel | `#0A0A0B` / `#131316` |
-| Foreground / Muted / Subtle | `#F2F2F4` / `#9A9AA2` / `#6D6D76` |
-| Border / Border-strong | `rgba(255,255,255,0.10)` / `rgba(255,255,255,0.18)` |
-| Accent (the one highlight color) | `#CAA057`, strong variant `#E2B96F`, on-accent text `#171208` |
-| Positive / Negative (return sign, functional only) | `#7FAE82` / `#C9776F` (muted, not saturated — consistent with the restrained palette) |
+**Role per page:** Overview — introduces itself in one short line near the headline, then orients toward the mini-demo's top pick. Performance — rests near the chart's latest point. Does It Work? — its main job: swings to point at rank 1 when a rebalance is chosen, and its glow intensity echoes (never replaces) the reveal's magnitude; color for win/loss stays on the existing `positive`/`negative` tokens, Vane's ring is a low-opacity accent tint only. How It's Built — travels the pipeline as a position indicator. What I Learned — resting, corner presence.
 
-Type: Geist (sans, body + headings) · Geist Mono (all data — figures, dates, tickers — `tabular-nums`). No display/body/data three-font split; two families total. Square corners on structural blocks (headers, stat blocks, chart containers); `rounded` (4px, Tailwind default) only on small inline chips/tags/code. No shadow anywhere — hairline borders provide all separation.
+**Where it steps aside:** never overlaps a number, a table, or a comparison; freezes to a static glow dot under `prefers-reduced-motion`; fully `aria-hidden` — everything it points at already has real text/ARIA carrying the same information, so hiding it loses nothing.
 
-**Rule:** the accent color is reserved for (a) the single headline stat, (b) the active nav item, (c) focus rings, (d) chart series identity for "the model." It is never used decoratively or repeated as background fill on large areas — scarcity is what keeps it meaningful in a mostly-grayscale system.
+**Production:** code-native SVG + framer-motion, no image-generation tool needed or available. One component, prop-driven state, kept in `src/components/character/`.
 
-## 6. Components and composition (unchanged from what's built; only relocated)
+## 5. Symbol language
 
-- **Header/nav:** new — persistent across all five pages, holds the page switcher.
-- **Research Header:** unchanged, now lives inside the Overview page only (not repeated per-page).
-- **Executive Result, Performance Chart, Ranking Quality, Historical Decision Explorer, Model Pipeline, Walk-Forward Diagram, Feature System, Portfolio Construction, Research Conclusion:** unchanged content and styling, each relocated into exactly one page per §3's table. No visual or copy changes to any of these beyond what §7 specifies for Limitations.
-- **Site Footer:** unchanged, persistent under every page.
+One shared primitive — a slim tick/sliver, Vane's own needle shape — recombined into a small glyph set, used sparingly (page/nav markers, pipeline-stage icons, a handful of inline callouts), never one-per-heading:
 
-## 7. Limitations — trimmed to 3
+| Glyph | Built from | Used for |
+|---|---|---|
+| Rank | three ticks, descending length | ordering, Top-3 selection |
+| Narrow | two ticks converging | the ~90-to-3 selection step |
+| Feature | a tick radiating from a small node | feature engineering |
+| Time/embargo | a tick crossing a gap | walk-forward's train/embargo boundary |
+| Evaluate | a tick centered in a ring | grading realized outcomes |
+| Uncertainty | a faint dashed tick | limitations, N/A states |
+| Compare | two mirrored ticks | model-vs-benchmark |
 
-The current build lists 10 limitations as a flat grid. Per instruction, cut to the 3 most decision-relevant, each covering a distinct axis of doubt (statistical validity, tail risk, real-world execution gap) rather than overlapping caveats:
+All single-color (`currentColor`), stroke-based, ~1.5px weight, sized to sit inline with text or as small standalone marks — never a decorative icon bolted onto a heading that doesn't need one.
 
-1. **Statistical significance** — "The raw return advantage over SPY does not clear a conventional significance bar (t = 0.66, p = 0.51) — the ranking edge itself does (t = 2.19, +1.85pp over the 50% baseline). Treat the return figure as descriptive, the ranking edge as the proven result."
-2. **Concentration risk** — "A 3-name basket lets a single idiosyncratic move dominate a period's return — the worst single-name outcome in this test lost 15.8% against a universe that gained 2.5% the same period."
-3. **No live execution** — "This is a backtest, not a live track record. A flat 15 bps round-trip cost is modeled; real slippage, fills, market impact, and taxes are not."
+## 6. Visual composition — how the five pages actually differ
 
-Dropped (still true, but redundant with the three above or lower-signal for a first read): small sample, regime dependence, signal decay, volatility-target lag, universe construction. Nothing dropped was inaccurate — this is a prioritization for a shorter list, not a retraction.
+Preserves background/accent/type from the original build; changes how content occupies the page so it stops reading as "bordered panel, repeat."
 
-Layout: same flat grid treatment as today, just 3 items instead of 10 (likely 1 column or 3-across rather than the current 2-column grid — implementer's call at build time).
+- **Overview:** asymmetric split, not centered hero-then-stack. Real whitespace above and below the headline. The mini-demo (§7) is the one place Overview gets dense; everything else stays open.
+- **Performance:** one dominant full-bleed chart area (tall, generous margin, no card wrapper around it) with the benchmark table and drawdown note below as plain ruled rows — dense only where the reading is genuinely comparative.
+- **Does It Work?:** compact stat row up top (small, confident, not the page's climax), then the explorer gets the rest of the page's height and width — it's the destination, not a scrolled-past section.
+- **How It's Built:** one continuous horizontal diagram instead of a card grid; expand-in-place for depth (feature groups, sizing math) instead of every stage being an identically-sized box.
+- **What I Learned:** the quietest page — no borders-as-hierarchy, generous line length, first-person prose leads, limitations collapse behind "show more" rather than filling the viewport.
 
-## 8. Writing and tone
+Chart series identity stays exactly as established: accent (`#CAA057`) for the model, `foreground`/`muted` for benchmarks, `positive`/`negative` reserved strictly for return sign — no decorative recoloring of real values, ever.
 
-Unchanged from what's shipped: first person, direct, quantitative — precise about method and honest about limits, no oversell. No copy changes required by this instruction beyond the Limitations trim in §7.
+## 7. Does It Work? — the pick explorer (this round's core interaction)
 
-## 9. Responsive and accessible behavior
+1. Choose a saved rebalance date (chip strip with prev/next, deterministic default = **earliest** available period, not the best-performing one).
+2. See the three real Top-3 picks for that date, with what was known *at prediction time* (rank, score, sizing) visually separated from what's known only *afterward* (realized percentile, next-20d return).
+3. Select an individual pick to inspect it — selecting never recomputes or implies a different portfolio; it only expands detail on a name already chosen.
+4. A deliberate reveal step (not autoplay, not hover-only) shows the realized outcome; once revealed for a period, it stays visible and stable.
+5. Compare the period's portfolio result against SPY, shown at the same time, same prominence — losses rendered exactly as clearly as gains.
+6. A "reveal all" affordance shows every pick's outcome without three separate clicks.
 
-Reading order matches visual order at every width. Top nav scrolls horizontally before wrapping (same proven pattern as before); logo truncates rather than wraps. Full keyboard access to the nav and the historical decision explorer; visible amber focus rings (already implemented via `:focus-visible`). Body text contrast against `#0A0A0B`/`#131316` already measured and passing for foreground/muted/subtle/accent. `prefers-reduced-motion` removes the page-transition crossfade in favor of an instant swap — content and function identical either way.
+**Graph → explorer link:** clicking an eligible point on the Performance chart (any of the 45 points that start a period — not the closing-only 46th) sets `?rebalance=` and either scrolls to / opens the explorer inline, or links to Does It Work? with that date pre-selected; the selection persists across the page boundary. A plain `<select>`/chip fallback exists for anyone who doesn't or can't use graph-point interaction — the graph is never the *only* way in.
 
-## 10. Scope and sequence
+No invented attribution: a score is a score, never re-explained as "because of feature X."
 
-**This instruction (design-only):** this document. No code changes made as part of this step.
+## 8. How It's Built
 
-**Next build step, when approved:** add a persistent top-nav/page-shell component; split `src/app/page.tsx`'s single render into five page groupings per §3's table (either five route-level views behind a client switcher, reusing the `?view=` pattern already proven in this codebase, or five actual Next.js routes — implementer's call, no strong preference stated); trim `src/components/limitations.tsx`'s data array to the 3 items in §7; no other component needs content or visual changes.
+One horizontal pipeline (data → 34 features across 10 families → walk-forward training → cross-sectional ranking → Top-3 selection → inverse-vol sizing → 20-day hold) — the real eight stages already documented, now one continuous diagram Vane travels along rather than eight identical bordered cards. Feature families expand in place (click to see the family's actual feature codes) instead of dumping all 34 into one grid. Terms get a one-line plain-language gloss alongside the precise one. Attribution stays factual: Eric built the pipeline; XGBoost, pandas, scikit-learn are named as the libraries used, never implied as his own inventions.
 
-**Reuse as-is, unchanged:** every existing section component's internals, `lib/data.ts`, `lib/types.ts`, `lib/format.ts`, all `public/data/*.json`, the export script, the dark/amber token system in `globals.css` (already reverted and matches this document).
+## 9. What I Learned
 
-**Out of scope:** reintroducing indigo/coral or any Live Board visual element, new data, auth, live data, dependency changes.
+First-person rewrite of the existing "what worked / what didn't / what this suggests" content — same real figures, reframed as reflection rather than a lab report's conclusion. A concise 3-headline limitations set up front (statistical significance, concentration risk, no live execution — the highest-signal, least-overlapping trio) with the remaining real caveats (regime dependence, signal decay, volatility-target lag, universe construction, small sample) behind a "show more" — nothing dropped, just sequenced. No claim of "proven" beyond what one saved backtest's t-statistic actually supports.
 
-## 11. Acceptance criteria
+## 10. Navigation and state
 
-- A persistent top nav lets a visitor jump directly to any of the five pages; the current page is visually distinct via the accent color.
-- Every one of the eleven existing sections still appears exactly once, unmodified, in the page assigned to it in §3.
-- Limitations shows exactly 3 items, using the exact copy in §7.
-- No indigo, coral, rounded-16px cards, medal-tint chips, or layout-reorder animation anywhere — this is the dark/amber system, unchanged from the original commit, plus navigation.
-- `prefers-reduced-motion` yields an instant page swap with identical content.
-- Mobile nav never wraps to a second line.
+Real routes or a client switcher (implementer's call; likely the latter, matching this codebase's existing `?view=` precedent) but with `pushState` for page changes so Back/Forward retrace actual navigation — `replaceState` is reserved only for same-page parameter refinement (e.g., moving the rebalance chip selection while already on Does It Work?), not for page-to-page moves. Direct links to any `?view=` (+ `?rebalance=` where relevant) render the right page and selection on load; an unknown/invalid param falls back to the deterministic default rather than erroring. Current page is marked in the nav (accent + underline, no sliding pill). Reload preserves the same state a fresh link would. Page changes scroll to top; in-page content includes its own next-step links so the header isn't the only way forward.
 
-## 12. Decisions and open questions
+## 11. Motion
 
-**Approved:** revert to the original dark/amber "Research Memo" visual system (explicit instruction, 2026-09-10); add a persistent top nav; split the single long scroll into five pages reusing existing content verbatim; trim Limitations to 3 (exact copy in §7).
+One grammar, reused rather than invented per spot: page-level crossfade (~220ms), Vane's four states (spring-based, never a fixed-duration tween that fights natural settling), a deliberate reveal step in the explorer, and a orchestrated (not looping) diagram-travel on How It's Built. No forced intro wait — content and nav are usable immediately, Vane's first sweep plays alongside, never gating. No scroll-hijacking, no perpetual motion beside dense text, no animated number that implies an intermediate value that doesn't exist, no full reveal replay on a small follow-up interaction. `prefers-reduced-motion` removes all of it in favor of instant final states with identical content.
 
-**Assumption stated, not yet confirmed:** the specific 3 limitations chosen in §7 are this document's recommendation (highest-signal, least-overlapping) — confirm before build if a different 3 are preferred. Also unconfirmed: whether the five pages should be implemented as a client-side switcher (matching the `?view=` pattern already proven in this codebase) or as real Next.js routes — either is compatible with this document; defaulting to the client-switcher pattern as the lower-risk, already-proven option unless told otherwise.
+## 12. Delight (small, after the core works)
 
-**Blocking:** none for documentation; awaiting explicit go-ahead to build (per instruction, this step is design-only).
+A small number of specific, project-true details layered on once the explorer/graph-link/nav work: e.g., Vane's idle wobble getting very slightly quicker the longer a visitor lingers on Does It Work? (curiosity rewarded, not gamified), a small "first time here" one-line acknowledgment from Vane on Overview that never recurs in the same session. No confetti, no unrelated effects, no per-click animation tax. Personality survives with motion off — a static Vane and stat glyphs still read as this project's identity.
+
+## 13. Accessibility
+
+Vane and all decorative glyphs: `aria-hidden`. Every fact Vane visually emphasizes exists as real text/ARIA elsewhere. Full keyboard access to the nav, chart point selection (with a non-graph fallback), and the explorer's date/pick/reveal controls; visible accent focus rings. `prefers-reduced-motion` yields full content with zero character/travel/reorder motion. Reading order matches visual order at every width; nav scrolls horizontally before wrapping on mobile.
+
+## 14. Scope and sequence
+
+Build all five pages complete — no placeholders, no deferral. Reuse working logic verbatim: `lib/data.ts`, `lib/types.ts`, `lib/format.ts`, all `public/data/*.json`, the export script, the dark/amber token system (extended, not replaced). Rewrite substantially: the historical explorer (selection/reveal/linking), the performance chart (prominence, click-to-select, annotations). Add: Vane, the symbol set, the nav/routing shell, per-page compositions. New dependency: `framer-motion` (justified by orchestrated character/reveal motion this round is built around).
+
+## 15. Acceptance criteria
+
+- Dark/amber identity still immediately recognizable as the same project.
+- Vane appears consistently across all five pages with a clear, non-decorative role, and is fully hidden from assistive tech without losing information.
+- The symbol set is visibly one family across nav, pipeline, and Vane.
+- Graph point selection and the explorer's selection are the same state, kept in sync, with a working non-graph fallback.
+- Explorer default period is the earliest date, not the best-performing one.
+- Drawdown (if shown) is explicitly labeled as sampled at rebalance frequency, not daily.
+- Back/Forward retrace real navigation; reload preserves state; invalid params fall back safely.
+- No two main pages share the same title-plus-stat-row-plus-card-grid composition.
+- All five pages are complete, real, and free of placeholder content.
+- `prefers-reduced-motion` yields full content with no character or reveal motion.
+
+## 16. Decisions and open questions
+
+**Approved:** keep dark/amber; add Vane, the symbol language, five distinct compositions, orchestrated motion (2026-09-10, explicit and detailed instruction). This document supersedes the prior "page-split only" plan's motion/copy/component restrictions.
+
+**Owned by implementation, not re-litigated here:** exact pixel dimensions of Vane, exact SVG paths for each glyph, exact spring constants — these are build-time craft decisions consistent with the direction above.
+
+**Blocking:** none — implementation is complete; this document has been re-synced against the shipped build, not just the pre-build plan.

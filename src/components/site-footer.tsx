@@ -34,6 +34,15 @@ export function SiteFooter() {
             exported historical results only.
           </p>
         </div>
+
+        <a
+          href="https://github.com/erichuangreal/trading_ml_demo"
+          target="_blank"
+          rel="noreferrer"
+          className="font-mono text-[0.75rem] text-subtle underline decoration-border underline-offset-4 hover:text-foreground hover:decoration-accent sm:hidden"
+        >
+          View source →
+        </a>
       </div>
     </footer>
   );

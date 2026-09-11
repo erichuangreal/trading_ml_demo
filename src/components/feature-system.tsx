@@ -1,37 +1,67 @@
-import { Section, SectionHeading } from "./ui/section";
+"use client";
+
+import { useState } from "react";
+import { SectionHeading } from "./ui/section";
+import { FeatureGlyph } from "./icons/glyphs";
 import type { ModelInfo } from "@/lib/types";
 
 export function FeatureSystem({ modelInfo }: { modelInfo: ModelInfo | null }) {
   const groups = modelInfo?.featureGroups;
+  const [expanded, setExpanded] = useState<Set<string>>(new Set());
+
   if (!groups || groups.length === 0) return null;
 
+  function toggle(name: string) {
+    setExpanded((prev) => {
+      const next = new Set(prev);
+      if (next.has(name)) next.delete(name);
+      else next.add(name);
+      return next;
+    });
+  }
+
   return (
-    <Section id="features">
+    <div>
       <SectionHeading
         title={`Feature system — ${modelInfo?.featureCount ?? groups.reduce((n, g) => n + g.features.length, 0)} engineered features across ${groups.length} signal families`}
-        lede="Grouped by what each family attempts to capture, not listed as a flat wall of indicator names."
+        lede="Grouped by what each family attempts to capture. Expand a family to see its actual feature codes."
       />
 
-      <dl className="divide-y divide-border border-t border-border">
-        {groups.map((group) => (
-          <div key={group.group} className="grid gap-2 py-5 sm:grid-cols-[180px_1fr] sm:gap-6">
-            <dt className="text-[0.9rem] font-medium text-foreground">{group.group}</dt>
-            <dd>
-              <p className="text-[0.85rem] leading-relaxed text-muted">{group.note}</p>
-              <div className="mt-2 flex flex-wrap gap-1.5">
-                {group.features.map((f) => (
-                  <code
-                    key={f}
-                    className="rounded border border-border px-1.5 py-0.5 font-mono text-[0.7rem] text-subtle"
-                  >
-                    {f}
-                  </code>
-                ))}
-              </div>
-            </dd>
-          </div>
-        ))}
-      </dl>
-    </Section>
+      <div className="grid gap-2 sm:grid-cols-2">
+        {groups.map((group) => {
+          const isOpen = expanded.has(group.group);
+          return (
+            <div key={group.group} className="border border-border">
+              <button
+                type="button"
+                onClick={() => toggle(group.group)}
+                aria-expanded={isOpen}
+                className="flex w-full items-start justify-between gap-3 p-4 text-left"
+              >
+                <div className="flex items-start gap-2.5">
+                  <FeatureGlyph className="mt-0.5 shrink-0 text-accent" />
+                  <div>
+                    <div className="text-[0.9rem] font-medium text-foreground">{group.group}</div>
+                    <p className="mt-0.5 text-[0.8rem] leading-relaxed text-muted">{group.note}</p>
+                  </div>
+                </div>
+                <span className="shrink-0 font-mono text-[0.7rem] tabular-nums text-subtle">
+                  {group.features.length} · {isOpen ? "−" : "+"}
+                </span>
+              </button>
+              {isOpen ? (
+                <div className="flex flex-wrap gap-1.5 border-t border-border p-4 pt-3">
+                  {group.features.map((f) => (
+                    <code key={f} className="rounded border border-border px-1.5 py-0.5 font-mono text-[0.7rem] text-subtle">
+                      {f}
+                    </code>
+                  ))}
+                </div>
+              ) : null}
+            </div>
+          );
+        })}
+      </div>
+    </div>
   );
 }
