@@ -47,7 +47,7 @@ function ChartTooltip({
         </div>
       ) : (
         <div className="mt-1.5 border-t border-border pt-1.5 font-mono text-[0.7rem] text-subtle">
-          closing value — no rebalance starts here
+          closing value, no rebalance starts here
         </div>
       )}
     </div>
@@ -150,7 +150,7 @@ export function PerformanceChart({
       </div>
 
       <div className="mt-3 flex flex-wrap items-center gap-3 text-[0.75rem] text-subtle">
-        <span>Model points open the historical explorer — click one, or:</span>
+        <span>Model points open the historical explorer: click one, or:</span>
         <label className="flex items-center gap-2">
           <span className="sr-only">Choose a rebalance date</span>
           <select

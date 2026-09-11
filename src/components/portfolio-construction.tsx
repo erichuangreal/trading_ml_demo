@@ -32,12 +32,12 @@ export function PortfolioConstruction({ metrics }: { metrics: MetricsData | null
 
       <p className="mt-8 max-w-2xl text-[0.85rem] leading-relaxed text-muted">
         Equal weighting the top 3 would let the single most volatile pick
-        dominate the basket&apos;s risk — the ranking says which names to
+        dominate the basket&apos;s risk. The ranking says which names to
         hold, not how much risk each deserves, so sizing inversely to{" "}
         <code className="rounded border border-border px-1 py-0.5 font-mono text-[0.75rem]">volatility_20d</code>{" "}
         equalizes each pick&apos;s risk contribution. The whole basket is then
         scaled toward a 17.3% annualized volatility target, clamped between
-        20% and 100% exposure — de-risking in turbulent stretches, never
+        20% and 100% exposure, de-risking in turbulent stretches, never
         levering past 1x.
         {metrics ? (
           <>
@@ -45,7 +45,7 @@ export function PortfolioConstruction({ metrics }: { metrics: MetricsData | null
             <span className="font-mono tabular-nums text-foreground">
               {formatPercent(metrics.realizedVolatility.topThree, 1)}
             </span>{" "}
-            annualized volatility — above target, since exposure is sized off
+            annualized volatility, above target, since exposure is sized off
             trailing realized volatility, which lags true forward risk. See
             What I Learned for the full limitations list.
           </>

@@ -6,11 +6,11 @@ import { UncertaintyGlyph } from "./icons/glyphs";
 const HEADLINE = [
   {
     title: "Statistical significance",
-    detail: "The raw return advantage over SPY doesn't clear a conventional significance bar (t = 0.66, p = 0.51) — the ranking edge itself does (t = 2.19, +1.85pp over the 50% baseline). I treat the return figure as descriptive, the ranking edge as the actual proven result.",
+    detail: "The raw return advantage over SPY doesn't clear a conventional significance bar (t = 0.66, p = 0.51); the ranking edge itself does (t = 2.19, +1.85pp over the 50% baseline). I treat the return figure as descriptive, the ranking edge as the actual proven result.",
   },
   {
     title: "Concentration risk",
-    detail: "A 3-name basket lets a single idiosyncratic move dominate a period's return — the worst single-name outcome in this test lost 15.8% against a universe that gained 2.5% the same period.",
+    detail: "A 3-name basket lets a single idiosyncratic move dominate a period's return. The worst single-name outcome in this test lost 15.8% against a universe that gained 2.5% the same period.",
   },
   {
     title: "No live execution",
@@ -21,7 +21,7 @@ const HEADLINE = [
 const MORE = [
   {
     title: "Small sample",
-    detail: "45 non-overlapping rebalances over 2023–2026 — enough for the ranking edge to clear significance, not enough to make strong claims about the return figures.",
+    detail: "45 non-overlapping rebalances over 2023–2026, enough for the ranking edge to clear significance, not enough to make strong claims about the return figures.",
   },
   {
     title: "Regime dependence",
@@ -33,11 +33,11 @@ const MORE = [
   },
   {
     title: "Volatility-target lag",
-    detail: "Exposure is sized off trailing realized volatility, which lags true forward risk — realized volatility ran above the 17.3% target the basket was sized to.",
+    detail: "Exposure is sized off trailing realized volatility, which lags true forward risk. Realized volatility ran above the 17.3% target the basket was sized to.",
   },
   {
     title: "Universe construction",
-    detail: "The ~90-name universe reflects the dataset's current membership, not a strictly point-in-time historical index list — some hindsight in \"what counted as the universe\" is possible.",
+    detail: "The ~90-name universe reflects the dataset's current membership, not a strictly point-in-time historical index list; some hindsight in \"what counted as the universe\" is possible.",
   },
 ];
 

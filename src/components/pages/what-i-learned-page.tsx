@@ -10,7 +10,7 @@ export function WhatILearnedPage({ metrics }: PageProps) {
         <Vane state="resting" size={30} className="mt-1" />
         <p className="text-[0.95rem] leading-relaxed text-muted">
           I built this because I wanted to know if I could actually make a working stock
-          ranker — not to make money, and not to convince anyone of anything. Here&apos;s
+          ranker, not to make money, and not to convince anyone of anything. Here&apos;s
           what I found, as plainly as I can put it.
         </p>
       </div>

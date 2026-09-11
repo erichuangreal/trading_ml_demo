@@ -6,7 +6,7 @@ import { SectionHeading } from "./ui/section";
 import { Vane } from "./character/vane";
 
 const STAGES = [
-  { title: "Historical market data", detail: "OHLCV, SPY/VIX, earnings dates, SEC EDGAR fundamentals — everything the model is allowed to see." },
+  { title: "Historical market data", detail: "OHLCV, SPY/VIX, earnings dates, SEC EDGAR fundamentals: everything the model is allowed to see." },
   { title: "Feature engineering", detail: "34 features across 10 families: momentum, trend, volatility, oscillators, range/structure, candle shape, volume, market context, earnings timing, fundamentals." },
   { title: "Walk-forward training", detail: "Retrained every 20 trading days on an expanding window of past data only, with a 20-day embargo so no label ever leaks into training." },
   { title: "XGBoost classifier", detail: "Estimates each stock's probability of beating the day's cross-sectional median return over the next 20 trading days." },

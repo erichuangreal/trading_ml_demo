@@ -26,7 +26,7 @@ export function DoesItWorkPage({ metrics, predictions, rebalance, selectRebalanc
         <p className="mt-2 max-w-2xl text-[0.9rem] leading-relaxed text-muted">
           Every one of the 45 real rebalances the model made during the test window.
           Prediction-time information is shown up front; the realized outcome is a
-          deliberate reveal, not automatic — nothing here is cherry-picked.
+          deliberate reveal, not automatic; nothing here is cherry-picked.
         </p>
         <div className="mt-6">
           <HistoricalDecisionExplorer

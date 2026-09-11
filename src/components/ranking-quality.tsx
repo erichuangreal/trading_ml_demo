@@ -26,9 +26,9 @@ function PercentileStrip({ periods }: { periods: PredictionsData["periods"] }) {
         })}
       </div>
       <div className="mt-1 flex justify-between font-mono text-[0.7rem] tabular-nums text-subtle">
-        <span>0.0 — worst</span>
-        <span>0.5 — no skill</span>
-        <span>1.0 — best</span>
+        <span>0.0 (worst)</span>
+        <span>0.5 (no skill)</span>
+        <span>1.0 (best)</span>
       </div>
     </div>
   );
@@ -92,7 +92,7 @@ export function RankingQuality({
         <p className="mt-1 max-w-xl text-[0.85rem] leading-relaxed text-muted">
           The same ranking, held at three different concentrations. Top 1 earns
           more on average but the extra return over Top 3 is not statistically
-          distinguishable from luck — see What I Learned for the full interpretation.
+          distinguishable from luck. See What I Learned for the full interpretation.
         </p>
         <table className="mt-4 w-full min-w-[420px] border-collapse">
           <thead>

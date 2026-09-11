@@ -12,7 +12,7 @@ export function WalkForwardDiagram() {
     <div>
       <SectionHeading
         title="Walk-forward validation"
-        lede="At every refit, only data from before a 20-day embargo is used for training; the model is then scored on the period immediately after. The window expands and slides forward through the whole test range — never a single random train/test split."
+        lede="At every refit, only data from before a 20-day embargo is used for training; the model is then scored on the period immediately after. The window expands and slides forward through the whole test range: never a single random train/test split."
       />
 
       <div className="border border-border p-5 sm:p-6">
@@ -57,7 +57,7 @@ export function WalkForwardDiagram() {
         Each rebalance&apos;s label looks 20 trading days into the future, so a
         row dated one day before the test block already carries information
         from inside it. The embargo drops the last 20 trading days of
-        training so no label ever overlaps the period being scored — a
+        training so no label ever overlaps the period being scored, a
         stricter and more realistic test than a single random split, at the
         cost of a smaller effective sample: 45 independent, non-overlapping
         periods across 2023–2026.

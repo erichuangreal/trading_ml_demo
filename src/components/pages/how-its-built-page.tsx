@@ -13,7 +13,7 @@ export function HowItsBuiltPage({ metrics, modelInfo }: PageProps) {
         </h1>
         <p className="mt-2 text-[0.95rem] leading-relaxed text-muted">
           Built end to end myself: data, features, training, ranking, and sizing. XGBoost,
-          pandas, and scikit-learn do the heavy lifting — the pipeline connecting them is mine.
+          pandas, and scikit-learn do the heavy lifting. The pipeline connecting them is mine.
         </p>
       </div>
 

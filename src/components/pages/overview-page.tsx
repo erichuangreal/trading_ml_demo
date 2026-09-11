@@ -113,11 +113,10 @@ export function OverviewPage({ metrics, predictions, selectRebalance, navigate }
           </h1>
 
           <p className="mt-6 max-w-lg text-[1.02rem] leading-relaxed text-muted">
-            This is a personal project I built and tested in my own time: an XGBoost
+            This is a personal project I built and tested: an XGBoost
             classifier that ranks a universe of equities every 20 trading days and
             bets on the top 3, sized so no single name can dominate the basket. Everything
-            on this site is a real, out-of-sample historical result. I wanted to see
-            what the model actually did, not just what it was supposed to do.
+            on this site is a real, out-of-sample historical result.
           </p>
 
           <div className="mt-6 flex flex-wrap gap-2">

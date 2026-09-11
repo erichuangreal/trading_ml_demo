@@ -5,11 +5,11 @@ import { motion, useReducedMotion } from "framer-motion";
 export type VaneState = "idle" | "alert" | "travel" | "resting";
 
 /**
- * Vane — a small amber compass-needle character built from the same tick
+ * Vane: a small amber compass-needle character built from the same tick
  * primitive as the symbol glyph set (see icons/glyphs.tsx). It seeks and
  * points at signal: idle sweep by default, snaps to point when something
  * ranks first, travels along the pipeline diagram, and rests during dense
- * reading. Purely decorative — aria-hidden throughout; everything it points
+ * reading. Purely decorative, aria-hidden throughout; everything it points
  * at already exists as real text/ARIA elsewhere.
  */
 export function Vane({

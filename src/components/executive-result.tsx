@@ -38,7 +38,7 @@ export function ExecutiveResult({ metrics }: { metrics: MetricsData | null }) {
     return (
       <div>
         <SectionHeading title="Executive result" />
-        <p className="text-sm text-muted">Metrics unavailable — public/data/metrics.json is missing.</p>
+        <p className="text-sm text-muted">Metrics unavailable: public/data/metrics.json is missing.</p>
       </div>
     );
   }
@@ -99,7 +99,7 @@ export function ExecutiveResult({ metrics }: { metrics: MetricsData | null }) {
           </span>{" "}
           annualized excess return vs. SPY, but that gap tests at t&nbsp;=&nbsp;
           {formatDecimal(significance.returnVsSpyTStat, 2)} (p&nbsp;=&nbsp;
-          {formatDecimal(significance.returnVsSpyPValue, 2)}) — not distinguishable
+          {formatDecimal(significance.returnVsSpyPValue, 2)}), not distinguishable
           from chance. Top 3 beat SPY in {significance.periodsWonVsSpy} of{" "}
           {significance.periodsTotal} independent rebalance periods.
         </p>
@@ -107,7 +107,7 @@ export function ExecutiveResult({ metrics }: { metrics: MetricsData | null }) {
           The cross-sectional sorting edge behind the picks is stronger evidence:{" "}
           {formatSignedPercent(metrics.sortingEdge, 2)} rank-accuracy edge at t&nbsp;=&nbsp;
           {formatDecimal(significance.sortingEdgeTStat, 2)}, significant across{" "}
-          {significance.periodsTotal} periods — see Does It Work? for the full case.
+          {significance.periodsTotal} periods. See Does It Work? for the full case.
         </p>
       </div>
     </div>

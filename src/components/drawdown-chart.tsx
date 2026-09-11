@@ -33,7 +33,7 @@ export function DrawdownChart({ equityCurve }: { equityCurve: EquityCurveData | 
       <h3 className="text-sm font-medium text-foreground">Drawdown from peak, at each rebalance</h3>
       <p className="mt-1 max-w-2xl text-[0.8rem] leading-relaxed text-muted">
         Worst point: <span className="font-mono tabular-nums text-negative">{formatPercent(worst.drawdown, 1)}</span> on{" "}
-        {formatDate(worst.date)}. This is measured only at the 46 rebalance-date observations, not daily — the real
+        {formatDate(worst.date)}. This is measured only at the 46 rebalance-date observations, not daily. The real
         intraperiod drawdown was very likely deeper than this chart can show.
       </p>
       <div className="mt-3 h-[160px] w-full">

@@ -16,7 +16,7 @@ export function PerformancePage({ metrics, equityCurve, predictions, rebalance, 
           </h1>
           <p className="mt-2 text-[0.95rem] leading-relaxed text-muted">
             $100 invested at the start of the test window, compounded through every real 20-trading-day rebalance.
-            Every point that starts a rebalance is clickable — it opens that period in{" "}
+            Every point that starts a rebalance is clickable; it opens that period in{" "}
             <button
               type="button"
               onClick={() => selectRebalance(rebalance, { navigateTo: "does-it-work" })}

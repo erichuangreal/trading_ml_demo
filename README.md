@@ -1,4 +1,4 @@
-# ML Equity Ranking System — Public Demo
+# ML Equity Ranking System: Public Demo
 
 ## Run it locally
 
@@ -9,8 +9,8 @@ npm run dev       # then open http://localhost:3000
 
 An interactive research-memo-style frontend for a private machine-learning
 equity-ranking project. It presents the model's methodology, walk-forward
-validation, historical decisions, and results — critically, including where
-the results fall short — to a technical audience (recruiters, engineers,
+validation, historical decisions, and results, critically, including where
+the results fall short, to a technical audience (recruiters, engineers,
 quant researchers) without exposing the underlying research implementation.
 
 [Live demo](https://trading-ml-demo.vercel.app/) · [Screenshot](#)
@@ -27,13 +27,13 @@ model: at each 20-trading-day rebalance, an XGBoost classifier ranks roughly
 the day's cross-sectional median return over the next 20 trading days. The
 top 3 are selected, sized inversely to their own volatility, and the whole
 basket is scaled to a 17.3% annualized volatility target. The model is
-retrained walk-forward — only on data available before each test period —
+retrained walk-forward, only on data available before each test period,
 so nothing in the test window ever leaks into training.
 
 This repository is the **public-facing half** of that project. The private
 research implementation (training code, feature engineering, walk-forward
 backtesting engine, saved model runs) lives in a separate, private
-repository. This repository never needs runtime access to it — it consumes
+repository. This repository never needs runtime access to it; it consumes
 static, exported JSON.
 
 ## Architecture
@@ -67,7 +67,7 @@ public/data/model_info.json       model config, validation method, feature group
 ```
 
 All four files are the sole source of truth for anything the UI presents as
-a real result. Nothing in the React components hard-codes a metric — every
+a real result. Nothing in the React components hard-codes a metric; every
 number renders from these JSON files, and a missing field renders as `N/A`
 rather than being invented. If a data file were ever replaced with a
 placeholder, it would carry an explicit `"sample": true` flag and the UI
@@ -76,7 +76,7 @@ would need to surface that (the current files are all real: `"sample": false`).
 ## Methodology
 
 - **Universe:** ~90 NASDAQ-listed equities, ranked cross-sectionally at each rebalance.
-- **Features:** 34 engineered features across 10 signal families — momentum,
+- **Features:** 34 engineered features across 10 signal families: momentum,
   trend, volatility, oscillators, range/structure, candle shape, volume,
   market context (SPY/VIX), earnings timing, and SEC EDGAR fundamentals.
 - **Model:** XGBoost classifier estimating P(beats the day's cross-sectional
@@ -87,7 +87,7 @@ would need to surface that (the current files are all real: `"sample": false`).
   training cutoff and the scored period so no forward-looking label ever
   leaks into training. This is a stricter, more realistic test than a
   single random train/test split, at the cost of a smaller effective
-  sample — 45 independent, non-overlapping periods across 2023–2026.
+  sample: 45 independent, non-overlapping periods across 2023–2026.
 - **Portfolio construction:** rank all ~90 names → select the top 3 →
   weight inversely to each pick's own volatility → scale the whole basket
   to a 17.3% annualized volatility target (clamped 20%–100% exposure) →
@@ -97,7 +97,7 @@ would need to surface that (the current files are all real: `"sample": false`).
 
 ## Headline results (final saved run)
 
-Sourced live from `public/data/metrics.json` — see that file for the exact,
+Sourced live from `public/data/metrics.json`; see that file for the exact,
 current numbers. As of the run this repo currently ships with:
 
 | | Top 3 (model) | SPY | Universe (90, eq-wt) |
@@ -109,7 +109,7 @@ The model beat SPY on raw return but not on risk-adjusted return. The
 raw-return gap over SPY is not statistically significant (t ≈ 0.66,
 p ≈ 0.51; won 20 of 45 periods). The cross-sectional **sorting edge**
 (+1.85pp rank-accuracy edge over the 50% baseline, t ≈ 2.19) is the more
-defensible result — see the site's Results Interpretation and Limitations
+defensible result. See the site's Results Interpretation and Limitations
 sections for the full, unvarnished discussion.
 
 ## Stack
@@ -143,7 +143,7 @@ npm run build
 
 ## Deployment
 
-Deploy directly to [Vercel](https://vercel.com) — this is a static Next.js
+Deploy directly to [Vercel](https://vercel.com). This is a static Next.js
 site with no environment variables or external services required. Connect
 the repository and deploy; `public/data/*.json` ships with the repo.
 

@@ -37,7 +37,7 @@ export function formatShortDate(value: string | undefined | null): string {
   });
 }
 
-/** Month + day only (e.g. "Jan 3") — enough to distinguish same-month rebalances in a compact chip strip. */
+/** Month + day only (e.g. "Jan 3"): enough to distinguish same-month rebalances in a compact chip strip. */
 export function formatChipDate(value: string | undefined | null): string {
   if (!value) return "N/A";
   const d = new Date(`${value}T00:00:00Z`);

@@ -23,7 +23,7 @@ export function FeatureSystem({ modelInfo }: { modelInfo: ModelInfo | null }) {
   return (
     <div>
       <SectionHeading
-        title={`Feature system — ${modelInfo?.featureCount ?? groups.reduce((n, g) => n + g.features.length, 0)} engineered features across ${groups.length} signal families`}
+        title={`Feature system: ${modelInfo?.featureCount ?? groups.reduce((n, g) => n + g.features.length, 0)} engineered features across ${groups.length} signal families`}
         lede="Grouped by what each family attempts to capture. Expand a family to see its actual feature codes."
       />
 

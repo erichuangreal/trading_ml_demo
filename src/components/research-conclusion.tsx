@@ -12,7 +12,7 @@ export function ResearchConclusion({ metrics }: { metrics: MetricsData | null })
           <h3 className="text-[0.9rem] font-medium text-foreground">What worked</h3>
           <ul className="mt-3 flex flex-col gap-3 text-[0.9rem] leading-relaxed text-muted">
             <li>
-              There&apos;s a real cross-sectional sorting edge —{" "}
+              There&apos;s a real cross-sectional sorting edge:{" "}
               <span className="font-mono tabular-nums text-foreground">+1.85pp</span> over
               the 50% baseline, significant at t&nbsp;=&nbsp;2.19 across 45 independent
               periods. That&apos;s the part I&apos;m actually proud of: the model can tell
@@ -25,7 +25,7 @@ export function ResearchConclusion({ metrics }: { metrics: MetricsData | null })
             <li>
               A{" "}
               <span className="font-mono tabular-nums text-foreground">+259 bps</span>{" "}
-              per-period top-minus-bottom spread — the clearest evidence the ranking
+              per-period top-minus-bottom spread, the clearest evidence the ranking
               actually separates stronger and weaker names, not just noise.
             </li>
             <li>Higher historical absolute return than SPY and the equal-weight universe, net of modeled transaction costs.</li>
@@ -43,7 +43,7 @@ export function ResearchConclusion({ metrics }: { metrics: MetricsData | null })
             </li>
             <li>
               The raw return advantage over SPY isn&apos;t statistically significant
-              (t&nbsp;=&nbsp;0.66, p&nbsp;=&nbsp;0.51) — I won 20 of 45 periods, close
+              (t&nbsp;=&nbsp;0.66, p&nbsp;=&nbsp;0.51); I won 20 of 45 periods, close
               to a coin flip. I can&apos;t honestly call the headline return number proven.
             </li>
             <li>
@@ -51,7 +51,7 @@ export function ResearchConclusion({ metrics }: { metrics: MetricsData | null })
               {metrics ? (metrics.realizedVolatility.topThree * 100).toFixed(1) : "N/A"}%)
               ran well above the 17.3% target I sized the basket to.
             </li>
-            <li>A 3-name basket concentrates idiosyncratic risk — one earnings surprise can dominate a period.</li>
+            <li>A 3-name basket concentrates idiosyncratic risk; one earnings surprise can dominate a period.</li>
           </ul>
         </div>
       </div>
@@ -64,8 +64,8 @@ export function ResearchConclusion({ metrics }: { metrics: MetricsData | null })
           significance bar across 45 non-overlapping periods; the return advantage
           over SPY does not, and I&apos;m not going to describe one saved backtest&apos;s
           t-statistic as proof of anything beyond that specific test. A Top-3 basket
-          is also a genuinely concentrated bet — most of its return variance comes from
-          broad market exposure, not stock selection — so a larger basket, or an
+          is also a genuinely concentrated bet: most of its return variance comes from
+          broad market exposure, not stock selection, so a larger basket, or an
           explicit hedge against the market, feels like a more promising way to express
           the same ranking signal than trusting the headline number on its own. That&apos;s
           the next thing I want to try.

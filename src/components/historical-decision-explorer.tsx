@@ -47,7 +47,7 @@ export function HistoricalDecisionExplorer({
   }, [index]);
 
   if (!predictions || periods.length === 0 || !period) {
-    return <p className="text-sm text-muted">Predictions unavailable — public/data/predictions.json is missing.</p>;
+    return <p className="text-sm text-muted">Predictions unavailable: public/data/predictions.json is missing.</p>;
   }
 
   const revealed = revealedDates.has(period.date);
@@ -181,7 +181,7 @@ export function HistoricalDecisionExplorer({
 
             {!revealed ? (
               <div className="flex items-center justify-between gap-3 border-t border-border p-4 sm:p-5">
-                <p className="text-[0.75rem] text-subtle">Outcomes are known only after the 20-day hold — nothing here was cherry-picked.</p>
+                <p className="text-[0.75rem] text-subtle">Outcomes are known only after the 20-day hold; nothing here was cherry-picked.</p>
                 <button
                   type="button"
                   onClick={reveal}

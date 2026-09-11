@@ -82,7 +82,7 @@ export function CompareGlyph(props: GlyphProps) {
   );
 }
 
-/** The raw needle sliver — the one primitive every glyph above (and Vane) derives from. */
+/** The raw needle sliver: the one primitive every glyph above (and Vane) derives from. */
 export function TickGlyph(props: GlyphProps) {
   return (
     <svg {...base} {...props}>
