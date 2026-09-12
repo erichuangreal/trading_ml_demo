@@ -2,13 +2,14 @@
 
 import { CartesianGrid, Line, LineChart, ReferenceLine, ResponsiveContainer, Tooltip, XAxis, YAxis } from "recharts";
 import type { DotProps } from "recharts";
+import { useReducedMotion } from "framer-motion";
 import { formatShortDate, formatDate } from "@/lib/format";
 import type { EquityCurveData, PredictionsData } from "@/lib/types";
 
 const SERIES = [
-  { key: "topThree", label: "Model (Top 3)", color: "var(--color-accent)", width: 2.5, dash: undefined },
-  { key: "spy", label: "SPY", color: "var(--color-foreground)", width: 1.5, dash: undefined },
-  { key: "universe", label: "Universe (90, eq-wt)", color: "var(--color-subtle)", width: 1.25, dash: "4 3" },
+  { key: "topThree", label: "Model (Top 3)", color: "var(--color-accent)", width: 2.5, dash: undefined, delay: 0 },
+  { key: "spy", label: "SPY", color: "var(--color-foreground)", width: 1.5, dash: undefined, delay: 250 },
+  { key: "universe", label: "Universe (90, eq-wt)", color: "var(--color-subtle)", width: 1.25, dash: "4 3", delay: 450 },
 ] as const;
 
 function ChartTooltip({
@@ -83,6 +84,8 @@ export function PerformanceChart({
   selectedDate: string | null;
   onSelectRebalance: (date: string) => void;
 }) {
+  const prefersReducedMotion = useReducedMotion();
+
   if (!equityCurve || equityCurve.series.length === 0) {
     return <p className="text-sm text-muted">The equity curve isn&apos;t available right now.</p>;
   }
@@ -142,7 +145,10 @@ export function PerformanceChart({
                 strokeDasharray={s.dash}
                 dot={s.key === "topThree" ? <EligibleDot eligibleDates={eligibleDates} selectedDate={selectedDate} /> : false}
                 activeDot={{ r: 4, fill: s.color, strokeWidth: 0 }}
-                isAnimationActive={false}
+                isAnimationActive={!prefersReducedMotion}
+                animationBegin={s.delay}
+                animationDuration={1100}
+                animationEasing="ease-out"
               />
             ))}
           </LineChart>

@@ -4,6 +4,7 @@ import { useEffect, useMemo, useRef, useState } from "react";
 import { AnimatePresence, motion, useReducedMotion } from "framer-motion";
 import { Vane } from "./character/vane";
 import { RankGlyph } from "./icons/glyphs";
+import { PercentileAxis, PercentileDot } from "./percentile-scale";
 import { formatDate, formatChipDate, formatSignedPercent, formatDecimal, formatPercent } from "@/lib/format";
 import type { PredictionsData } from "@/lib/types";
 
@@ -56,8 +57,23 @@ export function HistoricalDecisionExplorer({
     setRevealedDates((prev) => new Set(prev).add(period.date));
   }
 
+  const strongest = periods.reduce((best, p) => (p.portfolioReturn > best.portfolioReturn ? p : best), periods[0]);
+  const hardest = periods.reduce((worst, p) => (p.portfolioReturn < worst.portfolioReturn ? p : worst), periods[0]);
+
   return (
     <div>
+      <p className="mb-3 text-[0.75rem] text-subtle">
+        By portfolio return: strongest real period was{" "}
+        <button type="button" onClick={() => onSelectDate(strongest.date)} className="font-mono text-accent underline decoration-accent/40 underline-offset-2 hover:decoration-accent">
+          {formatChipDate(strongest.date)} ({formatSignedPercent(strongest.portfolioReturn, 1)})
+        </button>
+        , hardest was{" "}
+        <button type="button" onClick={() => onSelectDate(hardest.date)} className="font-mono text-negative underline decoration-negative/40 underline-offset-2 hover:decoration-negative">
+          {formatChipDate(hardest.date)} ({formatSignedPercent(hardest.portfolioReturn, 1)})
+        </button>
+        .
+      </p>
+
       <div className="flex items-center gap-3">
         <button
           type="button"
@@ -159,12 +175,19 @@ export function HistoricalDecisionExplorer({
                           median return), sized against {formatPercent(pick.volatility20d, 1)} trailing 20-day volatility.
                         </p>
                         {revealed ? (
-                          <p className="mt-2 border-t border-border pt-2">
-                            Known only afterward: landed at the{" "}
-                            <span className="font-mono tabular-nums text-foreground">{formatPercent(pick.actualPercentile, 0)}</span>{" "}
-                            percentile of that day&apos;s actual return distribution, returning{" "}
-                            <ReturnCell value={pick.next20dReturn} /> over the next 20 trading days.
-                          </p>
+                          <>
+                            <p className="mt-2 border-t border-border pt-2">
+                              Known only afterward: landed at the{" "}
+                              <span className="font-mono tabular-nums text-foreground">{formatPercent(pick.actualPercentile, 0)}</span>{" "}
+                              percentile of that day&apos;s actual return distribution, returning{" "}
+                              <ReturnCell value={pick.next20dReturn} /> over the next 20 trading days.
+                            </p>
+                            <div className="mt-3">
+                              <PercentileAxis height={28}>
+                                <PercentileDot pct={pick.actualPercentile} size={9} color="bg-accent" />
+                              </PercentileAxis>
+                            </div>
+                          </>
                         ) : (
                           <p className="mt-2 border-t border-border pt-2 text-subtle">Reveal the outcome below to see how it actually landed.</p>
                         )}

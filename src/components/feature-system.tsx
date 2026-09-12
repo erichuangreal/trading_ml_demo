@@ -1,10 +1,10 @@
 "use client";
 
 import { useState } from "react";
-import { SectionHeading } from "./ui/section";
 import { FeatureGlyph } from "./icons/glyphs";
 import type { ModelInfo } from "@/lib/types";
 
+/** Embedded inside How It's Built's pipeline detail panel for the "Feature engineering" stage. */
 export function FeatureSystem({ modelInfo }: { modelInfo: ModelInfo | null }) {
   const groups = modelInfo?.featureGroups;
   const [expanded, setExpanded] = useState<Set<string>>(new Set());
@@ -20,14 +20,16 @@ export function FeatureSystem({ modelInfo }: { modelInfo: ModelInfo | null }) {
     });
   }
 
+  const featureCount = modelInfo?.featureCount ?? groups.reduce((n, g) => n + g.features.length, 0);
+
   return (
     <div>
-      <SectionHeading
-        title={`Feature system: ${modelInfo?.featureCount ?? groups.reduce((n, g) => n + g.features.length, 0)} engineered features across ${groups.length} signal families`}
-        lede="Grouped by what each family attempts to capture. Expand a family to see its actual feature codes."
-      />
+      <p className="max-w-2xl text-[0.85rem] leading-relaxed text-muted">
+        {featureCount} engineered features across {groups.length} signal families, grouped by what each
+        attempts to capture. Expand a family to see its actual feature codes.
+      </p>
 
-      <div className="grid gap-2 sm:grid-cols-2">
+      <div className="mt-4 grid gap-2 sm:grid-cols-2">
         {groups.map((group) => {
           const isOpen = expanded.has(group.group);
           return (

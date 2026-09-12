@@ -1,7 +1,7 @@
 "use client";
 
-import { useState } from "react";
-import { motion, useReducedMotion } from "framer-motion";
+import { useEffect, useState } from "react";
+import { motion, AnimatePresence, useReducedMotion } from "framer-motion";
 import { Vane } from "../character/vane";
 import { RankGlyph } from "../icons/glyphs";
 import { Tag } from "../ui/tag";
@@ -14,6 +14,33 @@ import {
 } from "@/lib/format";
 import type { PageProps } from "./types";
 
+const FIELD_DOTS = 14;
+
+function ScanningField() {
+  return (
+    <div className="relative flex h-24 items-center justify-center">
+      <div className="grid grid-cols-7 gap-3">
+        {Array.from({ length: FIELD_DOTS }).map((_, i) => (
+          <motion.span
+            key={i}
+            className="block h-2 w-2 rounded-full bg-border-strong"
+            initial={{ opacity: 0.3 }}
+            animate={{ opacity: [0.3, 0.7, 0.3] }}
+            transition={{ duration: 1.4, repeat: Infinity, delay: i * 0.06, ease: "easeInOut" }}
+          />
+        ))}
+      </div>
+      <motion.div
+        className="absolute"
+        animate={{ left: ["8%", "55%", "30%", "80%", "50%"], top: ["20%", "60%", "40%", "30%", "50%"] }}
+        transition={{ duration: 1.3, ease: "easeInOut" }}
+      >
+        <Vane state="travel" size={30} />
+      </motion.div>
+    </div>
+  );
+}
+
 function MiniDemo({
   predictions,
   onExplore,
@@ -23,7 +50,24 @@ function MiniDemo({
 }) {
   const [revealed, setRevealed] = useState(false);
   const prefersReducedMotion = useReducedMotion();
+  // Server always renders the resolved state (no window/sessionStorage to
+  // check), so the client must start there too and only drop into the
+  // scanning animation from a post-mount effect, or hydration would mismatch
+  // exactly like the bug fixed in app-shell.tsx.
+  const [resolved, setResolved] = useState(true);
   const period = predictions?.periods[0];
+
+  useEffect(() => {
+    if (Boolean(prefersReducedMotion) || sessionStorage.getItem("overviewScanned") === "1") return;
+    // eslint-disable-next-line react-hooks/set-state-in-effect
+    setResolved(false);
+    const t = setTimeout(() => {
+      setResolved(true);
+      sessionStorage.setItem("overviewScanned", "1");
+    }, 1500);
+    return () => clearTimeout(t);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   if (!period) {
     return <p className="text-sm text-muted">Historical picks aren&apos;t available right now.</p>;
@@ -34,71 +78,82 @@ function MiniDemo({
       <div className="flex items-center justify-between gap-3">
         <div>
           <div className="font-mono text-[0.7rem] uppercase tracking-wide text-subtle">
-            The model&apos;s very first real rebalance
+            {resolved ? "The model's very first real rebalance" : "Scanning the universe…"}
           </div>
-          <div className="mt-1 font-mono text-sm tabular-nums text-foreground">{period.date}</div>
+          {resolved ? (
+            <div className="mt-1 font-mono text-sm tabular-nums text-foreground">{period.date}</div>
+          ) : null}
         </div>
-        <Vane state={revealed ? "alert" : "idle"} angle={20} size={34} />
+        {resolved ? <Vane state={revealed ? "alert" : "idle"} angle={20} size={34} /> : null}
       </div>
 
-      <ul className="mt-4 flex flex-col gap-2">
-        {period.picks.map((pick) => (
-          <li
-            key={pick.ticker}
-            className="flex items-center justify-between border-t border-border py-2.5 first:border-t-0"
-          >
-            <div className="flex items-center gap-2.5">
-              <RankGlyph className="text-subtle" width={14} height={14} />
-              <span className="font-mono text-sm tabular-nums text-foreground">{pick.ticker}</span>
-              <span className="font-mono text-[0.7rem] tabular-nums text-subtle">
-                score {formatDecimal(pick.score, 2)}
-              </span>
+      <AnimatePresence mode="wait">
+        {!resolved ? (
+          <motion.div key="scanning" initial={{ opacity: 1 }} exit={{ opacity: 0 }}>
+            <div className="mt-2">
+              <ScanningField />
             </div>
-            <motion.span
-              className="font-mono text-sm tabular-nums"
-              initial={false}
-              animate={{ opacity: 1 }}
-            >
-              {revealed ? (
-                <span className={pick.next20dReturn >= 0 ? "text-positive" : "text-negative"}>
-                  {formatSignedPercent(pick.next20dReturn, 1)}
-                </span>
-              ) : (
-                <span className="text-subtle">? ? ?</span>
-              )}
-            </motion.span>
-          </li>
-        ))}
-      </ul>
-
-      <div className="mt-5 flex flex-wrap items-center justify-between gap-3 border-t border-border pt-4">
-        {!revealed ? (
-          <button
-            type="button"
-            onClick={() => setRevealed(true)}
-            className="border border-accent px-3 py-1.5 font-mono text-[0.75rem] text-accent transition-colors hover:bg-accent hover:text-accent-foreground"
-          >
-            Reveal what happened next
-          </button>
+            <p className="mt-2 text-center text-[0.7rem] text-subtle">
+              Illustrative: the dots stand in for the ~90-name universe being scanned, not real distinct tickers.
+            </p>
+          </motion.div>
         ) : (
-          <p className="text-[0.75rem] text-subtle">
-            Real outcome, {period.date} + 20 trading days. Not a live recommendation.
-          </p>
+          <motion.div key="resolved" initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 0.3 }}>
+            <ul className="mt-4 flex flex-col gap-2">
+              {period.picks.map((pick, i) => (
+                <motion.li
+                  key={pick.ticker}
+                  layout
+                  initial={{ opacity: 0, y: 8 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.35, delay: i * 0.08 }}
+                  className="flex items-center justify-between border-t border-border py-2.5 first:border-t-0"
+                >
+                  <div className="flex items-center gap-2.5">
+                    <RankGlyph className="text-subtle" width={14} height={14} />
+                    <span className="font-mono text-sm tabular-nums text-foreground">{pick.ticker}</span>
+                    <span className="font-mono text-[0.7rem] tabular-nums text-subtle">
+                      score {formatDecimal(pick.score, 2)}
+                    </span>
+                  </div>
+                  <span className="font-mono text-sm tabular-nums">
+                    {revealed ? (
+                      <span className={pick.next20dReturn >= 0 ? "text-positive" : "text-negative"}>
+                        {formatSignedPercent(pick.next20dReturn, 1)}
+                      </span>
+                    ) : (
+                      <span className="text-subtle">? ? ?</span>
+                    )}
+                  </span>
+                </motion.li>
+              ))}
+            </ul>
+
+            <div className="mt-5 flex flex-wrap items-center justify-between gap-3 border-t border-border pt-4">
+              {!revealed ? (
+                <button
+                  type="button"
+                  onClick={() => setRevealed(true)}
+                  className="border border-accent px-3 py-1.5 font-mono text-[0.75rem] text-accent transition-colors hover:bg-accent hover:text-accent-foreground"
+                >
+                  Reveal what happened next
+                </button>
+              ) : (
+                <p className="text-[0.75rem] text-subtle">
+                  Real outcome, {period.date} + 20 trading days. Not a live recommendation.
+                </p>
+              )}
+              <button
+                type="button"
+                onClick={onExplore}
+                className="font-mono text-[0.75rem] text-muted underline decoration-border underline-offset-4 transition-colors hover:text-foreground hover:decoration-accent"
+              >
+                Explore all 45 rebalances →
+              </button>
+            </div>
+          </motion.div>
         )}
-        <button
-          type="button"
-          onClick={onExplore}
-          className="font-mono text-[0.75rem] text-muted underline decoration-border underline-offset-4 transition-colors hover:text-foreground hover:decoration-accent"
-        >
-          Explore all 45 rebalances →
-        </button>
-      </div>
-      <motion.div
-        aria-hidden
-        initial={false}
-        animate={{ opacity: revealed && !prefersReducedMotion ? 1 : 0 }}
-        className="pointer-events-none mt-3 h-px bg-gradient-to-r from-transparent via-accent/40 to-transparent"
-      />
+      </AnimatePresence>
     </div>
   );
 }
@@ -108,7 +163,7 @@ export function OverviewPage({ metrics, predictions, selectRebalance, navigate }
     <div className="mx-auto w-full max-w-5xl px-6 py-16 sm:px-8 sm:py-20 md:py-24">
       <div className="grid gap-12 md:grid-cols-[1.15fr_1fr] md:gap-16">
         <div>
-          <h1 className="max-w-xl text-[2rem] font-semibold leading-[1.12] tracking-tight text-foreground sm:text-[2.6rem]">
+          <h1 className="max-w-xl text-[2.1rem] font-semibold leading-[1.1] tracking-tight text-foreground sm:text-[2.9rem]">
             I taught a model to rank stocks. It edged out the S&P!
           </h1>
 
@@ -151,7 +206,7 @@ export function OverviewPage({ metrics, predictions, selectRebalance, navigate }
           <div className="mt-8 flex items-center gap-2.5 border-l-2 border-accent/50 pl-3">
             <Vane state="idle" size={26} />
             <p className="text-[0.85rem] text-subtle">
-              That&apos;s Vane: it&apos;ll point at whatever the model&apos;s watching as you explore.
+              That&apos;s Vane: watch it scan the field and land on the real picks on the right.
             </p>
           </div>
 

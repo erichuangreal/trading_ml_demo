@@ -62,6 +62,20 @@ export function Vane({
         />
       ) : null}
 
+      {(state === "idle" || state === "alert") && !prefersReducedMotion ? (
+        <motion.svg
+          className="absolute inset-0"
+          width={size}
+          height={size}
+          viewBox="0 0 40 40"
+          fill="none"
+          animate={{ opacity: [0.15, 0.4, 0.15], rotate: [0, 360] }}
+          transition={{ duration: 9, repeat: Infinity, ease: "linear" }}
+        >
+          <circle cx="20" cy="20" r="17" stroke="var(--color-accent)" strokeWidth="0.75" strokeDasharray="2 8" />
+        </motion.svg>
+      ) : null}
+
       <motion.span
         className="absolute inset-0 rounded-full"
         style={{ background: "radial-gradient(circle, var(--color-accent-glow) 0%, transparent 68%)" }}

@@ -2,7 +2,9 @@
 
 import { useMemo } from "react";
 import { Area, AreaChart, CartesianGrid, ResponsiveContainer, Tooltip, XAxis, YAxis } from "recharts";
+import { useReducedMotion } from "framer-motion";
 import { formatDate, formatPercent, formatShortDate } from "@/lib/format";
+import { useInView } from "@/lib/use-in-view";
 import type { EquityCurveData } from "@/lib/types";
 
 function DrawdownTooltip({ active, payload, label }: { active?: boolean; payload?: { value: number }[]; label?: string }) {
@@ -25,11 +27,14 @@ export function DrawdownChart({ equityCurve }: { equityCurve: EquityCurveData | 
     });
   }, [equityCurve]);
 
+  const { ref, inView } = useInView<HTMLDivElement>();
+  const prefersReducedMotion = useReducedMotion();
+
   if (data.length === 0) return null;
   const worst = data.reduce((min, d) => (d.drawdown < min.drawdown ? d : min), data[0]);
 
   return (
-    <div>
+    <div ref={ref}>
       <h3 className="text-sm font-medium text-foreground">Drawdown from peak, at each rebalance</h3>
       <p className="mt-1 max-w-2xl text-[0.8rem] leading-relaxed text-muted">
         Worst point: <span className="font-mono tabular-nums text-negative">{formatPercent(worst.drawdown, 1)}</span> on{" "}
@@ -43,7 +48,17 @@ export function DrawdownChart({ equityCurve }: { equityCurve: EquityCurveData | 
             <XAxis dataKey="date" tickFormatter={formatShortDate} tick={{ fill: "var(--color-subtle)", fontSize: 10 }} tickLine={false} axisLine={{ stroke: "var(--color-border)" }} minTickGap={50} />
             <YAxis tickFormatter={(v) => formatPercent(v, 0)} tick={{ fill: "var(--color-subtle)", fontSize: 10 }} tickLine={false} axisLine={false} width={44} />
             <Tooltip content={<DrawdownTooltip />} />
-            <Area type="monotone" dataKey="drawdown" stroke="var(--color-negative)" strokeWidth={1.25} fill="var(--color-negative)" fillOpacity={0.12} isAnimationActive={false} />
+            <Area
+              type="monotone"
+              dataKey="drawdown"
+              stroke="var(--color-negative)"
+              strokeWidth={1.25}
+              fill="var(--color-negative)"
+              fillOpacity={0.12}
+              isAnimationActive={inView && !prefersReducedMotion}
+              animationDuration={900}
+              animationEasing="ease-out"
+            />
           </AreaChart>
         </ResponsiveContainer>
       </div>

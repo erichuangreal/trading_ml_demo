@@ -1,35 +1,32 @@
-import { Stat } from "./ui/stat";
+"use client";
+
+import { useState } from "react";
+import { motion, useReducedMotion } from "framer-motion";
+import { PercentileAxis, PercentileDot } from "./percentile-scale";
 import { formatDecimal, formatPercent, formatSignedPercent } from "@/lib/format";
+import { useInView } from "@/lib/use-in-view";
 import type { MetricsData, PredictionsData } from "@/lib/types";
 
 function PercentileStrip({ periods }: { periods: PredictionsData["periods"] }) {
+  const { ref, inView } = useInView<HTMLDivElement>();
   return (
-    <div className="mt-2">
-      <div className="relative h-16 w-full">
-        <div className="absolute inset-x-0 top-1/2 h-px -translate-y-1/2 bg-border" />
-        <div className="absolute left-0 top-1/2 h-3 w-px -translate-y-1/2 bg-border-strong" />
-        <div className="absolute left-1/2 top-1/2 h-3 w-px -translate-x-1/2 -translate-y-1/2 bg-border-strong" />
-        <div className="absolute right-0 top-1/2 h-3 w-px -translate-y-1/2 bg-border-strong" />
-        {periods.map((p) => {
+    <div ref={ref}>
+      <PercentileAxis>
+        {periods.map((p, i) => {
           const pct = p.meanActualPercentile;
           const positive = pct > 0.5;
           return (
-            <div
+            <PercentileDot
               key={p.date}
-              className={`absolute top-1/2 h-2 w-2 -translate-x-1/2 -translate-y-1/2 rounded-full ${
-                positive ? "bg-accent" : "bg-subtle"
-              }`}
-              style={{ left: `${pct * 100}%` }}
+              pct={pct}
+              size={8}
+              color={positive ? "bg-accent" : "bg-subtle"}
+              delay={inView ? i * 0.012 : 0}
               title={`${p.date}: mean actual percentile ${pct.toFixed(3)}`}
             />
           );
         })}
-      </div>
-      <div className="mt-1 flex justify-between font-mono text-[0.7rem] tabular-nums text-subtle">
-        <span>0.0 (worst)</span>
-        <span>0.5 (no skill)</span>
-        <span>1.0 (best)</span>
-      </div>
+      </PercentileAxis>
     </div>
   );
 }
@@ -41,40 +38,18 @@ export function RankingQuality({
   metrics: MetricsData | null;
   predictions: PredictionsData | null;
 }) {
+  const [selected, setSelected] = useState<string>("Top 3");
+  const prefersReducedMotion = useReducedMotion();
+
   if (!metrics) return null;
+
+  const maxReturn = Math.max(...metrics.strategyComparison.map((r) => r.annualizedReturn));
+  const activeRow = metrics.strategyComparison.find((r) => r.strategy === selected) ?? metrics.strategyComparison[0];
 
   return (
     <div>
-      <div className="grid gap-6 border border-border sm:grid-cols-3 sm:divide-x sm:divide-border">
-        <div className="p-5">
-          <Stat
-            label="Rank accuracy (median split)"
-            value={formatPercent(metrics.rankAccuracy, 2)}
-            detail={`${formatSignedPercent(metrics.sortingEdge, 2)} over the 50% baseline, t = ${formatDecimal(
-              metrics.significance.sortingEdgeTStat,
-              2
-            )}`}
-            tone="accent"
-          />
-        </div>
-        <div className="p-5">
-          <Stat
-            label="Top-3 picks beating median"
-            value={formatPercent(metrics.pctTopThreeBeatingMedian, 1)}
-            detail="of individual picks, across all rebalances"
-          />
-        </div>
-        <div className="p-5">
-          <Stat
-            label="Top-minus-bottom-3 spread"
-            value={`${metrics.topMinusBottomSpreadBps.toFixed(0)} bps`}
-            detail="per 20-trading-day period"
-          />
-        </div>
-      </div>
-
       {predictions ? (
-        <div className="mt-10">
+        <div>
           <h3 className="text-sm font-medium text-foreground">
             Mean realized percentile of Top-3 picks, by rebalance
           </h3>
@@ -84,57 +59,95 @@ export function RankingQuality({
             distribution. A model with no skill clusters around 0.5.
           </p>
           <PercentileStrip periods={predictions.periods} />
+
+          <div className="mt-6 flex flex-wrap gap-x-8 gap-y-3 border-t border-border pt-5 text-[0.85rem]">
+            <span className="text-muted">
+              Mean lands at{" "}
+              <span className="font-mono tabular-nums font-medium text-accent">
+                {formatPercent(metrics.rankAccuracy, 2)}
+              </span>{" "}
+              ({formatSignedPercent(metrics.sortingEdge, 2)} over the 50% baseline, t ={" "}
+              {formatDecimal(metrics.significance.sortingEdgeTStat, 2)})
+            </span>
+            <span className="text-muted">
+              <span className="font-mono tabular-nums font-medium text-foreground">
+                {formatPercent(metrics.pctTopThreeBeatingMedian, 1)}
+              </span>{" "}
+              of individual picks beat their day&apos;s median
+            </span>
+            <span className="text-muted">
+              <span className="font-mono tabular-nums font-medium text-foreground">
+                {metrics.topMinusBottomSpreadBps.toFixed(0)} bps
+              </span>{" "}
+              top-minus-bottom-3 spread per period
+            </span>
+          </div>
         </div>
       ) : null}
 
       <div className="mt-10 overflow-x-auto">
         <h3 className="text-sm font-medium text-foreground">Basket size comparison</h3>
         <p className="mt-1 max-w-xl text-[0.85rem] leading-relaxed text-muted">
-          The same ranking, held at three different concentrations. Top 1 earns
+          The same ranking, held at three different concentrations. Select a row to compare. Top 1 earns
           more on average but the extra return over Top 3 is not statistically
           distinguishable from luck. See What I Learned for the full interpretation.
         </p>
-        <table className="mt-4 w-full min-w-[420px] border-collapse">
-          <thead>
-            <tr className="border-t border-border">
-              <th scope="col" className="py-2 pr-4 text-left text-[0.8rem] font-normal text-subtle">
-                Basket
-              </th>
-              <th scope="col" className="py-2 pr-4 text-right text-[0.8rem] font-normal text-subtle">
-                Annualized return
-              </th>
-              <th scope="col" className="py-2 pr-4 text-right text-[0.8rem] font-normal text-subtle">
-                Sharpe
-              </th>
-              <th scope="col" className="py-2 text-right text-[0.8rem] font-normal text-subtle">
-                Mean exposure
-              </th>
-            </tr>
-          </thead>
-          <tbody>
-            {metrics.strategyComparison.map((row) => (
-              <tr key={row.strategy} className="border-t border-border">
-                <th
-                  scope="row"
-                  className={`py-2.5 pr-4 text-left text-[0.85rem] font-normal ${
-                    row.strategy === "Top 3" ? "text-accent" : "text-muted"
-                  }`}
+
+        <div className="mt-4 flex flex-col gap-1.5" role="radiogroup" aria-label="Basket size">
+          {metrics.strategyComparison.map((row) => {
+            const isSelected = row.strategy === selected;
+            return (
+              <button
+                key={row.strategy}
+                type="button"
+                role="radio"
+                aria-checked={isSelected}
+                onClick={() => setSelected(row.strategy)}
+                className={`flex w-full min-w-[420px] items-center gap-4 border px-3 py-2.5 text-left transition-colors ${
+                  isSelected ? "border-accent bg-accent/5" : "border-border hover:border-border-strong"
+                }`}
+              >
+                <span
+                  className={`w-14 shrink-0 font-mono text-[0.85rem] ${isSelected ? "text-accent" : "text-muted"}`}
                 >
                   {row.strategy}
-                </th>
-                <td className="py-2.5 pr-4 text-right font-mono text-[0.9rem] tabular-nums text-foreground">
+                </span>
+                <span className="relative h-2 flex-1 overflow-hidden bg-border">
+                  <motion.span
+                    className={`absolute inset-y-0 left-0 ${isSelected ? "bg-accent" : "bg-subtle"}`}
+                    initial={prefersReducedMotion ? false : { width: 0 }}
+                    animate={{ width: `${(row.annualizedReturn / maxReturn) * 100}%` }}
+                    transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
+                  />
+                </span>
+                <span className="w-16 shrink-0 text-right font-mono text-[0.85rem] tabular-nums text-foreground">
                   {formatPercent(row.annualizedReturn, 1)}
-                </td>
-                <td className="py-2.5 pr-4 text-right font-mono text-[0.9rem] tabular-nums text-foreground">
-                  {formatDecimal(row.sharpe, 2)}
-                </td>
-                <td className="py-2.5 text-right font-mono text-[0.9rem] tabular-nums text-foreground">
-                  {formatPercent(row.meanExposure, 0)}
-                </td>
-              </tr>
-            ))}
-          </tbody>
-        </table>
+                </span>
+              </button>
+            );
+          })}
+        </div>
+
+        <div className="mt-4 grid grid-cols-3 gap-4 border-t border-border pt-4 text-[0.8rem]">
+          <div>
+            <div className="text-subtle">Annualized return</div>
+            <div className="mt-1 font-mono text-base tabular-nums text-foreground">
+              {formatPercent(activeRow.annualizedReturn, 1)}
+            </div>
+          </div>
+          <div>
+            <div className="text-subtle">Sharpe</div>
+            <div className="mt-1 font-mono text-base tabular-nums text-foreground">
+              {formatDecimal(activeRow.sharpe, 2)}
+            </div>
+          </div>
+          <div>
+            <div className="text-subtle">Mean exposure</div>
+            <div className="mt-1 font-mono text-base tabular-nums text-foreground">
+              {formatPercent(activeRow.meanExposure, 0)}
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   );

@@ -1,7 +1,4 @@
 import { ModelPipeline } from "../model-pipeline";
-import { WalkForwardDiagram } from "../walk-forward-diagram";
-import { FeatureSystem } from "../feature-system";
-import { PortfolioConstruction } from "../portfolio-construction";
 import type { PageProps } from "./types";
 
 export function HowItsBuiltPage({ metrics, modelInfo }: PageProps) {
@@ -17,19 +14,7 @@ export function HowItsBuiltPage({ metrics, modelInfo }: PageProps) {
         </p>
       </div>
 
-      <ModelPipeline />
-
-      <div className="mt-14 border-t border-border pt-10">
-        <WalkForwardDiagram />
-      </div>
-
-      <div className="mt-14 border-t border-border pt-10">
-        <FeatureSystem modelInfo={modelInfo} />
-      </div>
-
-      <div className="mt-14 border-t border-border pt-10">
-        <PortfolioConstruction metrics={metrics} />
-      </div>
+      <ModelPipeline modelInfo={modelInfo} metrics={metrics} />
     </div>
   );
 }

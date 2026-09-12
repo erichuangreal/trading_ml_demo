@@ -1,13 +1,14 @@
 "use client";
 
 import { useCallback, useEffect, useState } from "react";
-import { AnimatePresence, motion } from "framer-motion";
+import { AnimatePresence, motion, useReducedMotion } from "framer-motion";
 import { Vane } from "./character/vane";
 import { OverviewPage } from "./pages/overview-page";
 import { PerformancePage } from "./pages/performance-page";
 import { DoesItWorkPage } from "./pages/does-it-work-page";
 import { HowItsBuiltPage } from "./pages/how-its-built-page";
 import { WhatILearnedPage } from "./pages/what-i-learned-page";
+import { GlossaryPage } from "./pages/glossary-page";
 import { SiteFooter } from "./site-footer";
 import type { EquityCurveData, MetricsData, ModelInfo, PredictionsData } from "@/lib/types";
 
@@ -17,6 +18,7 @@ const VIEWS = [
   { id: "does-it-work", label: "Does It Work?" },
   { id: "how-its-built", label: "How It's Built" },
   { id: "what-i-learned", label: "What I Learned" },
+  { id: "glossary", label: "Glossary" },
 ] as const;
 
 export type ViewId = (typeof VIEWS)[number]["id"];
@@ -62,6 +64,7 @@ export function AppShell({
   // and React would throw a hydration error.
   const [view, setView] = useState<ViewId>("overview");
   const [rebalance, setRebalanceState] = useState<string | null>(null);
+  const prefersReducedMotion = useReducedMotion();
 
   useEffect(() => {
     // Deliberate one-time sync from the URL (a genuinely external, non-React
@@ -134,13 +137,20 @@ export function AppShell({
                 type="button"
                 onClick={() => navigate(v.id)}
                 aria-current={view === v.id ? "page" : undefined}
-                className={`shrink-0 whitespace-nowrap border-b-2 py-3 text-[0.8rem] transition-colors ${
-                  view === v.id
-                    ? "border-accent text-accent"
-                    : "border-transparent text-muted hover:text-foreground"
+                className={`relative shrink-0 whitespace-nowrap py-3 text-[0.8rem] transition-colors ${
+                  view === v.id ? "text-accent" : "text-muted hover:text-foreground"
                 }`}
               >
                 {v.label}
+                {view === v.id ? (
+                  <motion.span
+                    layoutId="nav-underline"
+                    className="absolute inset-x-0 bottom-0 h-0.5 bg-accent"
+                    transition={prefersReducedMotion ? { duration: 0 } : { type: "spring", stiffness: 500, damping: 40 }}
+                  />
+                ) : (
+                  <span className="absolute inset-x-0 bottom-0 h-0.5 bg-transparent" />
+                )}
               </button>
             ))}
           </nav>
@@ -170,6 +180,7 @@ export function AppShell({
             {view === "does-it-work" ? <DoesItWorkPage {...pageProps} /> : null}
             {view === "how-its-built" ? <HowItsBuiltPage {...pageProps} /> : null}
             {view === "what-i-learned" ? <WhatILearnedPage {...pageProps} /> : null}
+            {view === "glossary" ? <GlossaryPage {...pageProps} /> : null}
           </motion.div>
         </AnimatePresence>
       </main>

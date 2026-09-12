@@ -41,6 +41,10 @@ yarn-error.log*
 .claude/
 .codex/
 .impeccable/
+AGENTS.md
+CLAUDE.md
+DESIGN.md
+PRODUCT.md
 
 # typescript
 *.tsbuildinfo
