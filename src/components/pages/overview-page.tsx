@@ -164,14 +164,14 @@ export function OverviewPage({ metrics, predictions, selectRebalance, navigate }
       <div className="grid gap-12 md:grid-cols-[1.15fr_1fr] md:gap-16">
         <div>
           <h1 className="max-w-xl text-[2.1rem] font-semibold leading-[1.1] tracking-tight text-foreground sm:text-[2.9rem]">
-            I taught a model to rank stocks. It edged out the S&P!
+            I taught a model to rank stocks. It returned more than the S&P 500.
           </h1>
 
           <p className="mt-6 max-w-lg text-[1.02rem] leading-relaxed text-muted">
-            This is a personal project I built and tested: an XGBoost
-            classifier that ranks a universe of equities every 20 trading days and
-            bets on the top 3, sized so no single name can dominate the basket. Everything
-            on this site is a real, out-of-sample historical result.
+            This trading ml model ranks NASDAQ stocks against each other and forms a
+            long-only basket from the top-ranked, holding for 20 days. Built on OHLCV
+            technicals, market context (SPY/VIX), earnings dates, and SEC EDGAR fundamentals.
+            Trained on NASDAQ yFinance data.
           </p>
 
           <div className="mt-6 flex flex-wrap gap-2">
@@ -188,10 +188,10 @@ export function OverviewPage({ metrics, predictions, selectRebalance, navigate }
 
           {metrics ? (
             <p className="mt-6 max-w-lg text-[0.9rem] leading-relaxed text-subtle">
-              Headline numbers: {formatPercent(metrics.returns.topThreeAnnualized, 1)} annualized
-              return against SPY&apos;s {formatPercent(metrics.returns.spyAnnualized, 1)}, but a
-              lower Sharpe ratio ({formatDecimal(metrics.sharpe.topThree, 2)} vs.{" "}
-              {formatDecimal(metrics.sharpe.spy, 2)}). The honest read is on{" "}
+              Final model: Top 3, long only, 20-day hold, 34 features, inverse-volatility weighted
+              with the 17.3% vol target. Sorting edge +1.85pp at t = 2.19, +33.8%/yr net against
+              SPY's +24.3% and the universe's +27.7%.
+              The honest read is on{" "}
               <button
                 type="button"
                 onClick={() => navigate("performance")}
