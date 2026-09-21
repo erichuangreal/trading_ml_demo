@@ -1,7 +1,7 @@
 ---
 name: ML Equity Ranking System
-description: Dark/amber research-instrument identity, evolved with one character ("Vane," a seeking compass-needle), a shared symbol language, and five distinctly composed pages in place of one long scroll.
-status: SHIPPED: verified against the built code (2026-09-10): five pages, Vane, the tick-based glyph set, and per-page composition are all live; lint/typecheck/build clean; graph-click <-> explorer linking, Back/Forward, deep-links, and invalid-view fallback confirmed via interaction testing.
+description: Dark/amber research-instrument identity, evolved with one character ("Vane," a seeking compass-needle), a shared symbol language, and six distinctly composed pages in place of one long scroll.
+status: SHIPPED: verified against the built code (2026-09-10; extended 2026-09-21 with the Live demo page): six pages, Vane, the tick-based glyph set, and per-page composition are all live; lint/typecheck/build clean; graph-click <-> explorer linking, Back/Forward, deep-links, and invalid-view fallback confirmed via interaction testing. The sixth page is an ordinary extension of this same system: no tokens, type, colors, or existing-page composition changed.
 colors:
   background: "#0A0A0B"
   background-raised: "#131316"
@@ -53,11 +53,11 @@ All four `public/data/*.json` files are real (`"sample": false"`), from the priv
 
 **Critical mapping, verified against real records (periods 0, 1, 44):** `equity_curve.series[i]` is the portfolio's NAV *entering* `predictions.periods[i]` (same date); `equity_curve.series[i+1]` is its NAV after that period's 20-day hold: `predictions.periods[i].portfolioReturn` reconciles exactly with `series[i+1]/series[i] - 1`. The 46th equity point (2026-08-06) closes period 44 but starts no period of its own: it is not a selectable graph point in the explorer link (§6). Any derived drawdown is therefore sampled only at 20-trading-day rebalance marks, not daily, and must say so wherever it's labeled.
 
-No live data; no result outside the one cited run; nothing invented.
+No live data; no result outside the one cited run; nothing invented. **Confirmed exception:** the Live demo page is a deliberate, documented carve-out from this constraint: it triggers a real, live pipeline run against fresh data. This sentence describes the historical five pages' data source, not a site-wide ban on live behavior.
 
 ## 3. Information architecture
 
-Persistent top nav, five pages, URL-synced with real browser history (`pushState`, not `replaceState`, for page navigation: Back/Forward must retrace actual visits). A `?rebalance=` param carries the selected historical date between Performance and Does It Work?.
+Persistent top nav, six pages, URL-synced with real browser history (`pushState`, not `replaceState`, for page navigation: Back/Forward must retrace actual visits). A `?rebalance=` param carries the selected historical date between Performance and Does It Work?.
 
 | Page | Question | Composition idea (see §6) |
 |---|---|---|
@@ -66,6 +66,7 @@ Persistent top nav, five pages, URL-synced with real browser history (`pushState
 | **Does It Work?** | Is the ranking real, or luck? | Two-part: a compact statistical case up top (rank accuracy, spread, significance: dense, small, confident), then the full-width interactive pick explorer as the page's real center of gravity. |
 | **How It's Built** | What's under the hood? | A single continuous horizontal pipeline diagram (data → features → training → ranking → sizing → hold) that Vane travels along; each stage expands in place for depth instead of eight identical cards. |
 | **What I Learned** | Honest takeaway, in my own words | Editorial, quiet, generous whitespace: first-person reflection, Vane at rest in a corner, limitations as progressive disclosure rather than a grid of ten. |
+| **Live demo - try it!** | Does it actually work, right now, not just historically? | The live twin of How It's Built: the same six-stage pipeline motif (fetch prices → fetch fundamentals → EDGAR → process → retrain → rank), but driven by real backend run state instead of a click index, Vane traveling for real. A new decorative ticker leaderboard shuffles (explicitly non-numeric, no scores shown) while the run is live, then resolves in one deliberate motion into the real Top-3 podium the moment the real result lands. |
 
 ## 4. The character: Vane
 
@@ -79,7 +80,7 @@ Persistent top nav, five pages, URL-synced with real browser history (`pushState
 3. **Traveling**: moves along a path (the How It's Built pipeline) with a short fading trail behind it, like a compass needle sliding along a bearing.
 4. **Resting**: dimmed, minimal sweep, on What I Learned and anywhere dense reading needs to stay uninterrupted.
 
-**Role per page:** Overview: introduces itself in one short line near the headline, then orients toward the mini-demo's top pick. Performance: rests near the chart's latest point. Does It Work?: its main job: swings to point at rank 1 when a rebalance is chosen, and its glow intensity echoes (never replaces) the reveal's magnitude; color for win/loss stays on the existing `positive`/`negative` tokens, Vane's ring is a low-opacity accent tint only. How It's Built: travels the pipeline as a position indicator. What I Learned: resting, corner presence.
+**Role per page:** Overview: introduces itself in one short line near the headline, then orients toward the mini-demo's top pick. Performance: rests near the chart's latest point. Does It Work?: its main job: swings to point at rank 1 when a rebalance is chosen, and its glow intensity echoes (never replaces) the reveal's magnitude; color for win/loss stays on the existing `positive`/`negative` tokens, Vane's ring is a low-opacity accent tint only. How It's Built: travels the pipeline as a position indicator. What I Learned: resting, corner presence. Live demo: idle during the hero intro, travel while a real run is in progress (mirrored across the desktop horizontal pipeline and a new vertical mobile stepper, each with its own connecting line), alert once that run completes.
 
 **Where it steps aside:** never overlaps a number, a table, or a comparison; freezes to a static glow dot under `prefers-reduced-motion`; fully `aria-hidden`: everything it points at already has real text/ARIA carrying the same information, so hiding it loses nothing.
 
@@ -129,6 +130,8 @@ No invented attribution: a score is a score, never re-explained as "because of f
 ## 8. How It's Built
 
 One horizontal pipeline (data → 34 features across 10 families → walk-forward training → cross-sectional ranking → Top-3 selection → inverse-vol sizing → 20-day hold): the real eight stages already documented, now one continuous diagram Vane travels along rather than eight identical bordered cards. Feature families expand in place (click to see the family's actual feature codes) instead of dumping all 34 into one grid. Terms get a one-line plain-language gloss alongside the precise one. Attribution stays factual: Eric built the pipeline; XGBoost, pandas, scikit-learn are named as the libraries used, never implied as his own inventions.
+
+The Live demo page reuses this same numbered-node-pipeline motif but adds a more complete responsive treatment worth carrying forward: a vertical mobile stepper (numbered circles in a single column, a left-aligned connecting line, and Vane traveling vertically) instead of this page's `ModelPipeline` component, which simply hides its connecting line and Vane below the `sm` breakpoint. Any future pipeline-style diagram should default to the vertical-stepper treatment on mobile rather than the hide-below-`sm` shortcut.
 
 ## 9. What I Learned
 

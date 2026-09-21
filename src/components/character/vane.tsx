@@ -62,15 +62,23 @@ export function Vane({
         />
       ) : null}
 
-      {(state === "idle" || state === "alert") && !prefersReducedMotion ? (
+      {state === "idle" || state === "alert" ? (
         <motion.svg
           className="absolute inset-0"
           width={size}
           height={size}
           viewBox="0 0 40 40"
           fill="none"
-          animate={{ opacity: [0.15, 0.4, 0.15], rotate: [0, 360] }}
-          transition={{ duration: 9, repeat: Infinity, ease: "linear" }}
+          animate={
+            prefersReducedMotion
+              ? { opacity: 0.25, rotate: 0 }
+              : { opacity: [0.15, 0.4, 0.15], rotate: [0, 360] }
+          }
+          transition={
+            prefersReducedMotion
+              ? { duration: 0.2 }
+              : { duration: 9, repeat: Infinity, ease: "linear" }
+          }
         >
           <circle cx="20" cy="20" r="17" stroke="var(--color-accent)" strokeWidth="0.75" strokeDasharray="2 8" />
         </motion.svg>

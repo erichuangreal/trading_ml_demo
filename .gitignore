@@ -49,3 +49,9 @@ PRODUCT.md
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# backend (Live Demo FastAPI service)
+backend/.venv/
+backend/live_demo.db
+backend/__pycache__/
+backend/**/__pycache__/

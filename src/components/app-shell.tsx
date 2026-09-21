@@ -9,6 +9,7 @@ import { DoesItWorkPage } from "./pages/does-it-work-page";
 import { HowItsBuiltPage } from "./pages/how-its-built-page";
 import { WhatILearnedPage } from "./pages/what-i-learned-page";
 import { GlossaryPage } from "./pages/glossary-page";
+import { LiveDemoPage } from "./pages/live-demo-page";
 import { SiteFooter } from "./site-footer";
 import type { EquityCurveData, MetricsData, ModelInfo, PredictionsData } from "@/lib/types";
 
@@ -19,6 +20,7 @@ const VIEWS = [
   { id: "how-its-built", label: "How It's Built" },
   { id: "what-i-learned", label: "What I Learned" },
   { id: "glossary", label: "Glossary" },
+  { id: "live-demo", label: "Live demo - try it!" },
 ] as const;
 
 export type ViewId = (typeof VIEWS)[number]["id"];
@@ -181,6 +183,7 @@ export function AppShell({
             {view === "how-its-built" ? <HowItsBuiltPage {...pageProps} /> : null}
             {view === "what-i-learned" ? <WhatILearnedPage {...pageProps} /> : null}
             {view === "glossary" ? <GlossaryPage {...pageProps} /> : null}
+            {view === "live-demo" ? <LiveDemoPage {...pageProps} /> : null}
           </motion.div>
         </AnimatePresence>
       </main>

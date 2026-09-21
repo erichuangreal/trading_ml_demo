@@ -1,4 +1,9 @@
-import { EvaluateGlyph } from "../icons/glyphs";
+"use client";
+
+import { useRef, useState } from "react";
+import { motion } from "framer-motion";
+import { Vane, type VaneState } from "../character/vane";
+import { CompareGlyph, EvaluateGlyph, RankGlyph, TimeGlyph } from "../icons/glyphs";
 import type { PageProps } from "./types";
 
 const TERMS = [
@@ -49,32 +54,93 @@ const TERMS = [
   },
 ];
 
+// Sparse, on purpose: only the terms that are literally named after one of
+// the site's own symbols get marked with it. Marking all nine would be the
+// "one icon per heading" pattern the symbol language explicitly avoids.
+const GLYPHS: Record<string, typeof RankGlyph> = {
+  "Cross-sectional ranking": RankGlyph,
+  "Walk-forward validation": TimeGlyph,
+  Embargo: TimeGlyph,
+  "Sharpe ratio": CompareGlyph,
+};
+
 export function GlossaryPage(_props: PageProps) {
+  const [activeTerm, setActiveTerm] = useState<string | null>(null);
+  const [vaneState, setVaneState] = useState<VaneState>("idle");
+  const entryRefs = useRef<Record<string, HTMLDivElement | null>>({});
+  const resetTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
+
+  function jumpTo(term: string) {
+    entryRefs.current[term]?.scrollIntoView({ behavior: "smooth", block: "center" });
+    setActiveTerm(term);
+    setVaneState("alert");
+    if (resetTimer.current) clearTimeout(resetTimer.current);
+    resetTimer.current = setTimeout(() => {
+      setActiveTerm(null);
+      setVaneState("idle");
+    }, 1400);
+  }
+
   return (
     <div className="mx-auto w-full max-w-3xl px-6 py-16 sm:px-8 sm:py-20">
-      <div className="mb-12 flex items-start gap-3">
-        <EvaluateGlyph className="mt-1 text-accent" />
-        <div>
+      <div className="mb-8 flex items-start gap-3">
+        <EvaluateGlyph className="mt-1 shrink-0 text-accent" />
+        <div className="flex flex-1 items-start justify-between gap-3">
           <h1 className="text-[1.9rem] font-semibold tracking-tight text-foreground sm:text-[2.3rem]">
             How to read this site
           </h1>
-          <p className="mt-2 max-w-xl text-[0.95rem] leading-relaxed text-muted">
-            Plain-language explanations first, the precise definition underneath, tied to the actual numbers used
-            elsewhere on this site. Nothing here is a new claim; it&apos;s the same figures, explained.
-          </p>
+          <Vane state={vaneState} size={26} className="mt-1 shrink-0" />
         </div>
       </div>
 
-      <dl className="flex flex-col gap-0">
+      <div className="mb-10 flex flex-wrap gap-1.5" role="list" aria-label="Jump to a term">
         {TERMS.map((t) => (
-          <div key={t.term} className="border-t border-border py-6 first:border-t-0 first:pt-0">
-            <dt className="text-[1rem] font-medium text-foreground">{t.term}</dt>
-            <dd className="mt-2 max-w-xl text-[0.9rem] leading-relaxed text-muted">{t.plain}</dd>
-            <dd className="mt-2 max-w-xl border-l-2 border-border pl-3 text-[0.8rem] leading-relaxed text-subtle">
-              {t.precise}
-            </dd>
-          </div>
+          <button
+            key={t.term}
+            type="button"
+            role="listitem"
+            onClick={() => jumpTo(t.term)}
+            className={`border px-2.5 py-1.5 font-mono text-[0.7rem] transition-colors ${
+              activeTerm === t.term
+                ? "border-accent text-accent"
+                : "border-border text-subtle hover:border-border-strong hover:text-muted"
+            }`}
+          >
+            {t.term}
+          </button>
         ))}
+      </div>
+
+      <dl className="sm:columns-2 sm:gap-x-10">
+        {TERMS.map((t) => {
+          const Glyph = GLYPHS[t.term];
+          return (
+            <div
+              key={t.term}
+              ref={(el) => {
+                entryRefs.current[t.term] = el;
+              }}
+              className="break-inside-avoid border-t border-border py-6 first:border-t-0 first:pt-0"
+            >
+              <motion.div
+                animate={{
+                  backgroundColor: activeTerm === t.term ? "var(--color-accent-glow)" : "rgba(0,0,0,0)",
+                }}
+                transition={{ duration: 0.6 }}
+                className="-mx-3 rounded px-3 py-1"
+              >
+                <dt className="flex items-center gap-1.5 text-[1rem] font-medium text-foreground">
+                  {Glyph ? <Glyph width={12} height={12} className="shrink-0 text-accent/70" /> : null}
+                  {t.term}
+                </dt>
+                <dd className="mt-2 max-w-xl text-[0.9rem] leading-relaxed text-muted">{t.plain}</dd>
+                <dd className="mt-2 max-w-xl border-l-2 border-border pl-3 text-[0.8rem] leading-relaxed text-subtle">
+                  {t.precise}
+                </dd>
+              </motion.div>
+            </div>
+          );
+        })}
       </dl>
     </div>
   );
