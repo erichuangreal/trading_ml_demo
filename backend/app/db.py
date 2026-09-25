@@ -119,6 +119,15 @@ def fail_run(run_id, stage_key, message):
     con.close()
 
 
+def get_latest_done_run():
+    con = connect()
+    row = con.execute(
+        "SELECT * FROM runs WHERE status = 'done' ORDER BY id DESC LIMIT 1"
+    ).fetchone()
+    con.close()
+    return dict(row) if row else None
+
+
 def list_audit_log(limit=100):
     con = connect()
     rows = con.execute(

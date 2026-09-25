@@ -83,6 +83,16 @@ export function LiveDemoPage({ predictions }: PageProps) {
   const isDone = activeRun?.status === "done";
   const isError = activeRun?.status === "error";
 
+  // What the diagram + result panel actually render: today's real run if one
+  // exists (running, done, or errored), otherwise the most recent completed
+  // run as context, so the page never just shows an empty gap before 4pm ET
+  // or before anyone's triggered today. isShowingToday distinguishes the two
+  // for labeling -- a fallback result must never be mistaken for today's.
+  const isShowingToday = activeRun !== null;
+  const displayStages = activeRun?.stages ?? fallbackRun?.stages ?? null;
+  const displayResult = activeRun?.result ?? fallbackRun?.result ?? null;
+  const hasDisplay = displayStages !== null;
+
   return (
     <div className="mx-auto w-full max-w-5xl px-6 py-14 sm:px-8 sm:py-16">
       <div className="mb-8 flex items-start justify-between gap-4">
@@ -143,45 +153,45 @@ export function LiveDemoPage({ predictions }: PageProps) {
             </div>
           ) : null}
 
-          {activeRun && (isRunning || isDone) ? (
+          {hasDisplay ? (
             <div className="mb-8 border-t border-border pt-8">
-              <LivePipelineDiagram stages={activeRun.stages} />
+              {!isShowingToday && fallbackRun ? (
+                <p className="mb-4 text-[0.8rem] text-subtle">
+                  Most recent completed run, trading day{" "}
+                  <span className="font-mono tabular-nums text-foreground">{fallbackRun.tradingDay}</span>. Not
+                  today&apos;s result yet.
+                </p>
+              ) : null}
+              <LivePipelineDiagram stages={displayStages} />
             </div>
           ) : null}
 
           {activeRun && isError ? (
-            <div className="mb-8 border-t border-border pt-8">
-              <LivePipelineDiagram stages={activeRun.stages} />
-              <div className="mt-6 flex items-start gap-3 border border-border p-5">
-                <UncertaintyGlyph className="mt-0.5 shrink-0 text-subtle" width={20} height={20} />
-                <div>
-                  <p className="text-[0.85rem] text-foreground">
-                    Today&apos;s run hit an error at <span className="font-mono">{activeRun.error?.stage}</span>.
-                  </p>
-                  <p className="mt-1 text-[0.8rem] leading-relaxed text-subtle">
-                    {activeRun.error?.message?.split("\n")[0]}
-                  </p>
-                  <p className="mt-2 text-[0.8rem] text-subtle">
-                    Logged honestly in the audit log below rather than shown as a result. The next trading day&apos;s
-                    first visitor can try again.
-                  </p>
-                </div>
+            <div className="mb-8 flex items-start gap-3 border border-border p-5">
+              <UncertaintyGlyph className="mt-0.5 shrink-0 text-subtle" width={20} height={20} />
+              <div>
+                <p className="text-[0.85rem] text-foreground">
+                  Today&apos;s run hit an error at <span className="font-mono">{activeRun.error?.stage}</span>.
+                </p>
+                <p className="mt-1 text-[0.8rem] leading-relaxed text-subtle">
+                  {activeRun.error?.message?.split("\n")[0]}
+                </p>
+                <p className="mt-2 text-[0.8rem] text-subtle">
+                  Logged honestly in the audit log below rather than shown as a result. The next trading day&apos;s
+                  first visitor can try again.
+                </p>
               </div>
             </div>
           ) : null}
 
-          {activeRun && (isRunning || isDone) ? (
+          {isRunning || displayResult ? (
             <div className="mb-8">
-              <TickerLeaderboard tickerPool={tickerPool} isRunning={isRunning} result={activeRun.result} />
-            </div>
-          ) : null}
-
-          {!activeRun && fallbackRun?.result ? (
-            <div className="mb-8 border-t border-border pt-8">
-              <p className="mb-4 text-[0.8rem] text-subtle">
-                Most recent completed run, {fallbackRun.tradingDay}:
-              </p>
-              <TickerLeaderboard tickerPool={tickerPool} isRunning={false} result={fallbackRun.result} />
+              <TickerLeaderboard
+                tickerPool={tickerPool}
+                isRunning={isRunning}
+                result={displayResult}
+                isToday={isShowingToday}
+              />
             </div>
           ) : null}
         </>

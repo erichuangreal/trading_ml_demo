@@ -32,10 +32,13 @@ export function TickerLeaderboard({
   tickerPool,
   isRunning,
   result,
+  isToday = true,
 }: {
   tickerPool: string[];
   isRunning: boolean;
   result: LiveResult | null;
+  /** False when result is the most recent completed run, not today's. */
+  isToday?: boolean;
 }) {
   const prefersReducedMotion = useReducedMotion();
   const pool = tickerPool.length > 0 ? tickerPool : ["N/A"];
@@ -63,7 +66,9 @@ export function TickerLeaderboard({
         <div className="flex items-center justify-between gap-3 border-b border-border p-4 sm:p-5">
           <div className="flex items-center gap-2.5">
             <Vane state="alert" angle={20} size={28} />
-            <span className="text-[0.85rem] font-medium text-foreground">Today&apos;s real Top 3</span>
+            <span className="text-[0.85rem] font-medium text-foreground">
+              {isToday ? "Today's real Top 3" : "Most recent real Top 3"}
+            </span>
           </div>
           <span className="font-mono text-[0.75rem] tabular-nums text-subtle">as of {result.asOf}</span>
         </div>

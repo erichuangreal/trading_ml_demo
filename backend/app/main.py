@@ -82,9 +82,10 @@ def get_status():
 
     # No run for today yet (not triggered, weekend, or before 4pm ET) --
     # fall back to the latest completed run so the page always has real
-    # data to show instead of a blank state.
-    latest = db.list_audit_log(limit=1)
-    fallback = _serialize_run(latest[0]) if latest else None
+    # data to show instead of a blank state. Specifically the latest DONE
+    # run, not just the latest row: an error has no result, so it must
+    # never silently take this slot.
+    fallback = _serialize_run(db.get_latest_done_run())
 
     return {
         "date_et": today,

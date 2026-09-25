@@ -1,0 +1,14 @@
+[Unit]
+Description=Live Demo backend (FastAPI/uvicorn)
+After=network.target
+
+[Service]
+Type=simple
+User=sean
+WorkingDirectory=/home/sean/trading_ml_demo/backend/app
+ExecStart=/home/sean/trading_ml_demo/backend/.venv/bin/uvicorn main:app --host 0.0.0.0 --port 8003
+Restart=on-failure
+RestartSec=5
+
+[Install]
+WantedBy=multi-user.target
